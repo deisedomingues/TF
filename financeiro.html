@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Financeiro | Agenda Clínica</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">D</div>
+        <span>Agenda Clínica</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html">Pacientes</a>
+        <a href="registrar-sessao.html">Sessões</a>
+        <a href="financeiro.html" class="ativo">Financeiro</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <section class="cabecalho-pagina">
+        <h1>Financeiro</h1>
+        <p class="subtitulo">
+          Controle sessões pagas, pendentes e valores previstos.
+        </p>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador">
+          <span>Recebido no mês</span>
+          <strong>R$ 3.200</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Pendente</span>
+          <strong>R$ 850</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Sessões pagas</span>
+          <strong>32</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Sessões pendentes</span>
+          <strong>7</strong>
+        </div>
+      </section>
+
+      <section class="card" style="margin-bottom: 24px;">
+        <h2>Novo lançamento</h2>
+
+        <form>
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="paciente">Paciente</label>
+              <select id="paciente">
+                <option>Maria Oliveira</option>
+                <option>João Santos</option>
+              </select>
+            </div>
+
+            <div class="form-grupo">
+              <label for="valor">Valor</label>
+              <input type="number" id="valor" placeholder="Exemplo: 150.00" />
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="vencimento">Data de vencimento</label>
+              <input type="date" id="vencimento" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="status">Status</label>
+              <select id="status">
+                <option>Pendente</option>
+                <option>Pago</option>
+                <option>Atrasado</option>
+                <option>Cancelado</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-principal">
+            Salvar lançamento
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Pagamentos recentes</h2>
+
+        <div class="lista" style="margin-top: 12px;">
+
+          <article class="item-lista">
+            <div>
+              <h3>Maria Oliveira</h3>
+              <p>Sessão de 22/04/2026 — R$ 150,00</p>
+              <div class="tags">
+                <span class="tag">Pago</span>
+              </div>
+            </div>
+
+            <a href="#" class="btn btn-claro">Detalhes</a>
+          </article>
+
+          <article class="item-lista">
+            <div>
+              <h3>João Santos</h3>
+              <p>Sessão de 20/04/2026 — R$ 150,00</p>
+              <div class="tags">
+                <span class="tag">Pendente</span>
+              </div>
+            </div>
+
+            <a href="#" class="btn btn-claro">Detalhes</a>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

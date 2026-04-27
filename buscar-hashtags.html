@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Buscar por Hashtags | Agenda Clínica</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">D</div>
+        <span>Agenda Clínica</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html">Pacientes</a>
+        <a href="registrar-sessao.html">Sessões</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="buscar-hashtags.html" class="ativo">Hashtags</a>
+        <a href="financeiro.html">Financeiro</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <div style="margin-bottom: 16px;">
+        <a href="home.html" class="btn btn-claro">
+          ← Voltar para início
+        </a>
+      </div>
+
+      <section class="cabecalho-pagina">
+        <h1>Buscar por hashtags</h1>
+        <p class="subtitulo">
+          Encontre registros de sessões por tema, paciente, palavra-chave ou hashtag.
+        </p>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador">
+          <span>Tags cadastradas</span>
+          <strong>24</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Registros com tags</span>
+          <strong>76</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Tag mais usada</span>
+          <strong style="font-size: 22px;">#ansiedade</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Pacientes encontrados</span>
+          <strong>8</strong>
+        </div>
+      </section>
+
+      <section class="card" style="margin-bottom: 24px;">
+        <h2>Filtros de busca</h2>
+
+        <p class="subtitulo" style="margin-bottom: 18px;">
+          Digite uma palavra ou clique em uma hashtag rápida para filtrar os registros.
+        </p>
+
+        <div class="linha-form">
+          <div class="form-grupo">
+            <label for="buscaGeral">Buscar</label>
+            <input 
+              type="text" 
+              id="buscaGeral" 
+              placeholder="Ex: #ansiedade, trabalho, Maria..."
+            />
+          </div>
+
+          <div class="form-grupo">
+            <label for="filtroPaciente">Paciente</label>
+            <select id="filtroPaciente">
+              <option value="">Todos os pacientes</option>
+              <option value="maria oliveira">Maria Oliveira</option>
+              <option value="joão santos">João Santos</option>
+              <option value="ana ferreira">Ana Ferreira</option>
+              <option value="carlos mendes">Carlos Mendes</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="linha-form">
+          <div class="form-grupo">
+            <label for="dataInicio">Data inicial</label>
+            <input type="date" id="dataInicio" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="dataFim">Data final</label>
+            <input type="date" id="dataFim" />
+          </div>
+        </div>
+
+        <div style="margin-top: 8px;">
+          <p class="subtitulo" style="margin-bottom: 10px;">
+            Hashtags rápidas:
+          </p>
+
+          <div class="tags">
+            <button type="button" class="tag tag-botao" data-tag="#ansiedade">#ansiedade</button>
+            <button type="button" class="tag tag-botao" data-tag="#trabalho">#trabalho</button>
+            <button type="button" class="tag tag-botao" data-tag="#família">#família</button>
+            <button type="button" class="tag tag-botao" data-tag="#sono">#sono</button>
+            <button type="button" class="tag tag-botao" data-tag="#rotina">#rotina</button>
+            <button type="button" class="tag tag-botao" data-tag="#autoestima">#autoestima</button>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
+          <button type="button" class="btn btn-principal" id="btnBuscar">
+            Buscar registros
+          </button>
+
+          <button type="button" class="btn btn-claro" id="btnLimpar">
+            Limpar filtros
+          </button>
+        </div>
+      </section>
+
+      <section>
+        <div class="barra-acoes">
+          <div>
+            <h2>Resultados</h2>
+            <p class="subtitulo" id="textoResultado">
+              Exibindo registros de exemplo.
+            </p>
+          </div>
+        </div>
+
+        <div class="lista" id="listaResultados">
+
+          <article 
+            class="sessao-card resultado-card"
+            data-paciente="maria oliveira"
+            data-data="2026-04-22"
+          >
+            <div class="sessao-topo">
+              <div>
+                <h3>Maria Oliveira — 22/04/2026</h3>
+                <p>Sessão online — realizada das 14:00 às 15:00</p>
+              </div>
+
+              <span class="tag">Realizada</span>
+            </div>
+
+            <p class="texto-sessao">
+              Paciente relatou ansiedade relacionada ao trabalho, principalmente antes de reuniões.
+              Foram conversadas estratégias para organização da rotina e identificação de pensamentos automáticos.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#ansiedade</span>
+              <span class="tag">#trabalho</span>
+              <span class="tag">#rotina</span>
+            </div>
+          </article>
+
+          <article 
+            class="sessao-card resultado-card"
+            data-paciente="joão santos"
+            data-data="2026-04-20"
+          >
+            <div class="sessao-topo">
+              <div>
+                <h3>João Santos — 20/04/2026</h3>
+                <p>Sessão presencial — realizada das 11:00 às 12:00</p>
+              </div>
+
+              <span class="tag">Realizada</span>
+            </div>
+
+            <p class="texto-sessao">
+              Conversa sobre dificuldade em manter rotina, excesso de tarefas e sensação de cobrança constante.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#rotina</span>
+              <span class="tag">#trabalho</span>
+            </div>
+          </article>
+
+          <article 
+            class="sessao-card resultado-card"
+            data-paciente="ana ferreira"
+            data-data="2026-04-18"
+          >
+            <div class="sessao-topo">
+              <div>
+                <h3>Ana Ferreira — 18/04/2026</h3>
+                <p>Sessão online — realizada das 16:00 às 17:00</p>
+              </div>
+
+              <span class="tag">Realizada</span>
+            </div>
+
+            <p class="texto-sessao">
+              Paciente trouxe dificuldades relacionadas ao sono, cansaço durante o dia e preocupação excessiva à noite.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#sono</span>
+              <span class="tag">#ansiedade</span>
+            </div>
+          </article>
+
+          <article 
+            class="sessao-card resultado-card"
+            data-paciente="carlos mendes"
+            data-data="2026-04-12"
+          >
+            <div class="sessao-topo">
+              <div>
+                <h3>Carlos Mendes — 12/04/2026</h3>
+                <p>Sessão presencial — realizada das 09:00 às 10:00</p>
+              </div>
+
+              <span class="tag">Realizada</span>
+            </div>
+
+            <p class="texto-sessao">
+              Sessão focada em autoestima, autocrítica e comparação com outras pessoas.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#autoestima</span>
+              <span class="tag">#autocrítica</span>
+            </div>
+          </article>
+
+          <article 
+            class="sessao-card resultado-card"
+            data-paciente="maria oliveira"
+            data-data="2026-04-10"
+          >
+            <div class="sessao-topo">
+              <div>
+                <h3>Maria Oliveira — 10/04/2026</h3>
+                <p>Sessão presencial — realizada das 14:00 às 15:00</p>
+              </div>
+
+              <span class="tag">Realizada</span>
+            </div>
+
+            <p class="texto-sessao">
+              Discussão sobre conflitos familiares, comunicação e dificuldade para estabelecer limites.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#família</span>
+              <span class="tag">#limites</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="js/tema.js"></script>
+  <script src="js/buscar-hashtags.js"></script>
+</body>
+</html>

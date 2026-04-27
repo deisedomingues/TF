@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Agenda | Agenda Clínica</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">D</div>
+        <span>Agenda Clínica</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html">Pacientes</a>
+        <a href="registrar-sessao.html">Sessões</a>
+        <a href="agenda.html" class="ativo">Agenda</a>
+        <a href="financeiro.html">Financeiro</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <section class="cabecalho-pagina">
+        <h1>Agenda</h1>
+        <p class="subtitulo">
+          Organize sessões avulsas ou recorrentes, acompanhe os compromissos do dia e visualize os próximos atendimentos.
+        </p>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador">
+          <span>Atendimentos hoje</span>
+          <strong>4</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Esta semana</span>
+          <strong>18</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Recorrentes</span>
+          <strong>9</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Remarcações</span>
+          <strong>2</strong>
+        </div>
+      </section>
+
+      <section class="layout-agenda">
+
+        <!-- FORMULÁRIO -->
+        <div class="card">
+          <h2>Novo agendamento</h2>
+
+          <p class="subtitulo" style="margin-bottom: 18px;">
+            Use este formulário para criar uma sessão única ou uma sequência de sessões recorrentes.
+          </p>
+
+          <form id="formAgenda">
+
+            <div class="form-grupo">
+              <label for="paciente">Paciente</label>
+              <select id="paciente" required>
+                <option value="">Selecione um paciente</option>
+                <option value="1">Maria Oliveira</option>
+                <option value="2">João Santos</option>
+                <option value="3">Ana Ferreira</option>
+                <option value="4">Carlos Mendes</option>
+              </select>
+            </div>
+
+            <div class="linha-form">
+              <div class="form-grupo">
+                <label for="dataPrimeiraSessao">Data da primeira sessão</label>
+                <input type="date" id="dataPrimeiraSessao" required />
+              </div>
+
+              <div class="form-grupo">
+                <label for="valorSessao">Valor da sessão</label>
+                <input type="number" id="valorSessao" placeholder="Ex: 150.00" min="0" step="0.01" />
+              </div>
+            </div>
+
+            <div class="linha-form">
+              <div class="form-grupo">
+                <label for="horaInicio">Hora de início</label>
+                <input type="time" id="horaInicio" required />
+              </div>
+
+              <div class="form-grupo">
+                <label for="horaFim">Hora de fim</label>
+                <input type="time" id="horaFim" required />
+              </div>
+            </div>
+
+            <div class="linha-form">
+              <div class="form-grupo">
+                <label for="modalidade">Modalidade</label>
+                <select id="modalidade">
+                  <option>Presencial</option>
+                  <option>Online</option>
+                  <option>Híbrida</option>
+                </select>
+              </div>
+
+              <div class="form-grupo">
+                <label for="status">Status inicial</label>
+                <select id="status">
+                  <option>Agendada</option>
+                  <option>Realizada</option>
+                  <option>Cancelada pelo paciente</option>
+                  <option>Cancelada pelo psicólogo</option>
+                  <option>Falta</option>
+                  <option>Remarcada</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grupo">
+              <label for="recorrencia">Recorrência</label>
+              <select id="recorrencia">
+                <option value="nao">Não repetir</option>
+                <option value="semanal">Toda semana</option>
+                <option value="quinzenal">A cada 15 dias</option>
+                <option value="mensal">Todo mês</option>
+              </select>
+            </div>
+
+            <div id="boxRecorrencia" class="box-recorrencia" style="display: none;">
+              <p class="subtitulo" style="margin-bottom: 12px;">
+                Escolha como a repetição será encerrada. Você pode informar uma data final ou uma quantidade de sessões.
+              </p>
+
+              <div class="linha-form">
+                <div class="form-grupo">
+                  <label for="repetirAte">Repetir até</label>
+                  <input type="date" id="repetirAte" />
+                </div>
+
+                <div class="form-grupo">
+                  <label for="quantidadeSessoes">Quantidade de sessões</label>
+                  <input type="number" id="quantidadeSessoes" min="1" placeholder="Ex: 10" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-grupo">
+              <label for="observacoes">Observações</label>
+              <textarea 
+                id="observacoes"
+                placeholder="Ex: paciente prefere atendimento online, precisa de lembrete, pacote mensal etc."
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-principal btn-largura-total">
+              Salvar agendamento
+            </button>
+
+          </form>
+        </div>
+
+        <!-- AGENDA DO DIA -->
+        <div class="card">
+          <div class="barra-acoes">
+            <div>
+              <h2>Agenda de hoje</h2>
+              <p class="subtitulo">Segunda-feira, 27/04/2026</p>
+            </div>
+
+            <span class="tag">4 sessões</span>
+          </div>
+
+          <div class="linha-do-tempo">
+
+            <article class="evento-agenda">
+              <div class="hora-evento">
+                <strong>09:00</strong>
+                <span>10:00</span>
+              </div>
+
+              <div class="conteudo-evento">
+                <h3>Maria Oliveira</h3>
+                <p>Atendimento online</p>
+
+                <div class="tags">
+                  <span class="tag">Agendada</span>
+                  <span class="tag">Recorrente</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="evento-agenda">
+              <div class="hora-evento">
+                <strong>11:00</strong>
+                <span>12:00</span>
+              </div>
+
+              <div class="conteudo-evento">
+                <h3>João Santos</h3>
+                <p>Atendimento presencial</p>
+
+                <div class="tags">
+                  <span class="tag">Agendada</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="evento-agenda">
+              <div class="hora-evento">
+                <strong>14:00</strong>
+                <span>15:00</span>
+              </div>
+
+              <div class="conteudo-evento">
+                <h3>Ana Ferreira</h3>
+                <p>Atendimento online</p>
+
+                <div class="tags">
+                  <span class="tag">Agendada</span>
+                  <span class="tag">Pagamento pendente</span>
+                </div>
+              </div>
+            </article>
+
+            <article class="evento-agenda">
+              <div class="hora-evento">
+                <strong>17:00</strong>
+                <span>18:00</span>
+              </div>
+
+              <div class="conteudo-evento">
+                <h3>Carlos Mendes</h3>
+                <p>Atendimento presencial</p>
+
+                <div class="tags">
+                  <span class="tag">Remarcada</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- PRÓXIMOS AGENDAMENTOS -->
+      <section style="margin-top: 24px;">
+        <div class="barra-acoes">
+          <div>
+            <h2>Próximos agendamentos</h2>
+            <p class="subtitulo">
+              Lista simples dos próximos compromissos cadastrados.
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn btn-claro" type="button">Hoje</button>
+            <button class="btn btn-claro" type="button">Semana</button>
+            <button class="btn btn-claro" type="button">Mês</button>
+          </div>
+        </div>
+
+        <div class="lista">
+
+          <article class="item-lista">
+            <div>
+              <h3>Maria Oliveira</h3>
+              <p><strong>Segunda-feira, 27/04/2026</strong> — 09:00 às 10:00</p>
+              <p>Online — sessão recorrente semanal</p>
+
+              <div class="tags">
+                <span class="tag">Agendada</span>
+                <span class="tag">R$ 150,00</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a href="registrar-sessao.html" class="btn btn-secundario">Registrar</a>
+              <button type="button" class="btn btn-claro">Remarcar</button>
+            </div>
+          </article>
+
+          <article class="item-lista">
+            <div>
+              <h3>João Santos</h3>
+              <p><strong>Terça-feira, 28/04/2026</strong> — 16:00 às 17:00</p>
+              <p>Presencial — sessão avulsa</p>
+
+              <div class="tags">
+                <span class="tag">Agendada</span>
+                <span class="tag">R$ 180,00</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a href="registrar-sessao.html" class="btn btn-secundario">Registrar</a>
+              <button type="button" class="btn btn-claro">Remarcar</button>
+            </div>
+          </article>
+
+          <article class="item-lista">
+            <div>
+              <h3>Ana Ferreira</h3>
+              <p><strong>Quarta-feira, 29/04/2026</strong> — 14:00 às 15:00</p>
+              <p>Online — sessão recorrente quinzenal</p>
+
+              <div class="tags">
+                <span class="tag">Agendada</span>
+                <span class="tag">Pagamento pendente</span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <a href="registrar-sessao.html" class="btn btn-secundario">Registrar</a>
+              <button type="button" class="btn btn-claro">Remarcar</button>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+  <script src="js/tema.js"></script>
+  <script src="js/agenda.js"></script>
+</body>
+</html>

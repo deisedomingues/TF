@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pacientes | Agenda Clínica</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">D</div>
+        <span>Agenda Clínica</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html" class="ativo">Pacientes</a>
+        <a href="registrar-sessao.html">Sessões</a>
+        <a href="financeiro.html">Financeiro</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <section class="cabecalho-pagina">
+        <h1>Pacientes</h1>
+        <p class="subtitulo">
+          Cadastre pacientes e consulte rapidamente seus dados principais.
+        </p>
+      </section>
+
+      <section class="card" style="margin-bottom: 24px;">
+        <h2>Novo paciente</h2>
+
+        <form>
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="nome">Nome completo</label>
+              <input type="text" id="nome" placeholder="Nome do paciente" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="nascimento">Data de nascimento</label>
+              <input type="date" id="nascimento" />
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="telefone">Telefone</label>
+              <input type="text" id="telefone" placeholder="(00) 00000-0000" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" placeholder="email@exemplo.com" />
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="observacoes">Observações iniciais</label>
+            <textarea id="observacoes" placeholder="Informações gerais sobre o paciente"></textarea>
+          </div>
+
+          <button type="button" class="btn btn-principal">
+            Salvar paciente
+          </button>
+        </form>
+      </section>
+
+      <section>
+        <div class="barra-acoes">
+          <h2>Pacientes cadastrados</h2>
+
+          <input 
+            type="text" 
+            placeholder="Buscar paciente..."
+            style="max-width: 280px;"
+          />
+        </div>
+
+        <div class="lista">
+
+          <article class="item-lista">
+            <div>
+              <h3>Maria Oliveira</h3>
+              <p>Telefone: (11) 99999-0000</p>
+              <p>E-mail: maria@email.com</p>
+            </div>
+
+            <a href="paciente-detalhes.html" class="btn btn-secundario">Ver histórico</a>
+          </article>
+
+          <article class="item-lista">
+            <div>
+              <h3>João Santos</h3>
+              <p>Telefone: (11) 98888-1111</p>
+              <p>E-mail: joao@email.com</p>
+            </div>
+
+            <a href="paciente-detalhes.html" class="btn btn-secundario">Ver histórico</a>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Configurações | Agenda Clínica</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">D</div>
+        <span>Agenda Clínica</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html">Pacientes</a>
+        <a href="registrar-sessao.html">Sessões</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="buscar-hashtags.html">Hashtags</a>
+        <a href="financeiro.html">Financeiro</a>
+        <a href="configuracoes.html" class="ativo">Configurações</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <div style="margin-bottom: 16px;">
+        <a href="home.html" class="btn btn-claro">
+          ← Voltar para início
+        </a>
+      </div>
+
+      <section class="cabecalho-pagina">
+        <h1>Configurações</h1>
+        <p class="subtitulo">
+          Ajuste os dados do profissional, preferências de atendimento, valores padrão e tema visual do sistema.
+        </p>
+      </section>
+
+      <div id="mensagemConfig" class="mensagem-sucesso" style="display: none;">
+        Configurações salvas com sucesso!
+      </div>
+
+      <form id="formConfiguracoes">
+
+        <section class="layout-configuracoes">
+
+          <div>
+
+            <section class="card" style="margin-bottom: 20px;">
+              <h2>Dados do profissional</h2>
+
+              <p class="subtitulo" style="margin-bottom: 18px;">
+                Essas informações poderão aparecer em relatórios, recibos e identificação interna do sistema.
+              </p>
+
+              <div class="linha-form">
+                <div class="form-grupo">
+                  <label for="nomeProfissional">Nome profissional</label>
+                  <input 
+                    type="text" 
+                    id="nomeProfissional" 
+                    value="Deise Domingues"
+                    required
+                  />
+                </div>
+
+                <div class="form-grupo">
+                  <label for="crp">CRP</label>
+                  <input 
+                    type="text" 
+                    id="crp" 
+                    placeholder="Ex: CRP 06/000000"
+                  />
+                </div>
+              </div>
+
+              <div class="linha-form">
+                <div class="form-grupo">
+                  <label for="emailProfissional">E-mail profissional</label>
+                  <input 
+                    type="email" 
+                    id="emailProfissional" 
+                    placeholder="email@clinica.com"
+                  />
+                </div>
+
+                <div class="form-grupo">
+                  <label for="telefoneProfissional">Telefone profissional</label>
+                  <input 
+                    type="text" 
+                    id="telefoneProfissional" 
+                    placeholder="(00) 00000-0000"
+                  />
+                </div>
+              </div>
+
+              <div class="form-grupo">
+                <label for="enderecoAtendimento">Endereço de atendimento presencial</label>
+                <input 
+                  type="text" 
+                  id="enderecoAtendimento" 
+                  placeholder="Rua, número, bairro, cidade"
+                />
+              </div>
+
+              <div class="form-grupo">
+                <label for="bioProfissional">Descrição profissional</label>
+                <textarea 
+                  id="bioProfissional"
+                  placeholder="Ex: Psicóloga clínica com atendimento para adultos..."
+                ></textarea>
+              </div>
+            </section>
+
+            <section class="card" style="margin-bottom: 20px;">
+              <h2>Preferências de atendimento</h2>
+
+              <p class="subtitulo" style="margin-bottom: 18px;">
+                Esses dados podem ser usados automaticamente na agenda e no financeiro.
+              </p>
+
+              <div class="linha-form">
+                <div class="form-grupo">
+                  <label for="valorPadrao">Valor padrão da sessão</label>
+                  <input 
+                    type="number" 
+                    id="valorPadrao" 
+                    placeholder="Ex: 150.00"
+                    min="0"
+                    step="0.01"
+                  />
+                </div>
+
+                <div class="form-grupo">
+                  <label for="duracaoPadrao">Duração padrão</label>
+                  <select id="duracaoPadrao">
+                    <option value="30">30 minutos</option>
+                    <option value="45">45 minutos</option>
+                    <option value="50" selected>50 minutos</option>
+                    <option value="60">60 minutos</option>
+                    <option value="90">90 minutos</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="linha-form">
+                <div class="form-grupo">
+                  <label for="modalidadePadrao">Modalidade padrão</label>
+                  <select id="modalidadePadrao">
+                    <option>Presencial</option>
+                    <option selected>Online</option>
+                    <option>Híbrida</option>
+                  </select>
+                </div>
+
+                <div class="form-grupo">
+                  <label for="intervaloSessoes">Intervalo entre sessões</label>
+                  <select id="intervaloSessoes">
+                    <option value="0">Sem intervalo</option>
+                    <option value="10" selected>10 minutos</option>
+                    <option value="15">15 minutos</option>
+                    <option value="20">20 minutos</option>
+                    <option value="30">30 minutos</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="linha-form">
+                <div class="form-grupo">
+                  <label for="lembretePadrao">Lembrete padrão</label>
+                  <select id="lembretePadrao">
+                    <option value="nenhum">Nenhum</option>
+                    <option value="1h">1 hora antes</option>
+                    <option value="3h">3 horas antes</option>
+                    <option value="24h" selected>24 horas antes</option>
+                    <option value="48h">48 horas antes</option>
+                  </select>
+                </div>
+
+                <div class="form-grupo">
+                  <label for="formaPagamentoPadrao">Forma de pagamento mais usada</label>
+                  <select id="formaPagamentoPadrao">
+                    <option>Pix</option>
+                    <option>Dinheiro</option>
+                    <option>Cartão de crédito</option>
+                    <option>Cartão de débito</option>
+                    <option>Transferência bancária</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2>Preferências visuais</h2>
+
+              <p class="subtitulo" style="margin-bottom: 18px;">
+                Escolha um tema pronto para mudar a aparência do sistema. Nesta versão, a escolha fica salva no navegador.
+              </p>
+
+              <div class="form-grupo">
+                <label for="nomeSistema">Nome do sistema</label>
+                <input 
+                  type="text" 
+                  id="nomeSistema" 
+                  value="Agenda Clínica"
+                />
+              </div>
+
+              <div class="form-grupo">
+                <label>Tema visual</label>
+
+                <div class="opcoes-tema">
+
+                  <button type="button" class="opcao-tema ativo" data-tema="show">
+                    <div class="info-tema">
+                      <strong>Show</strong>
+                      <span>Branco, laranja pôr do sol e vermelho-violeta</span>
+                    </div>
+
+                    <div class="amostras-tema">
+                      <span class="bolinha-cor" style="background:#FFFFFF;"></span>
+                      <span class="bolinha-cor" style="background:#FF5841;"></span>
+                      <span class="bolinha-cor" style="background:#C53678;"></span>
+                    </div>
+                  </button>
+
+                  <button type="button" class="opcao-tema" data-tema="ceu">
+                    <div class="info-tema">
+                      <strong>Céu</strong>
+                      <span>Azul claro, azul brilhante e branco</span>
+                    </div>
+
+                    <div class="amostras-tema">
+                      <span class="bolinha-cor" style="background:#E9F1FA;"></span>
+                      <span class="bolinha-cor" style="background:#00ABE4;"></span>
+                      <span class="bolinha-cor" style="background:#FFFFFF;"></span>
+                    </div>
+                  </button>
+
+                  <button type="button" class="opcao-tema" data-tema="noite">
+                    <div class="info-tema">
+                      <strong>Noite</strong>
+                      <span>Azul escuro, turquesa e dourado</span>
+                    </div>
+
+                    <div class="amostras-tema">
+                      <span class="bolinha-cor" style="background:#0A1828;"></span>
+                      <span class="bolinha-cor" style="background:#178582;"></span>
+                      <span class="bolinha-cor" style="background:#BFA181;"></span>
+                    </div>
+                  </button>
+
+                  <button type="button" class="opcao-tema" data-tema="casual">
+                    <div class="info-tema">
+                      <strong>Casual</strong>
+                      <span>Azul escuro e dourado</span>
+                    </div>
+
+                    <div class="amostras-tema">
+                      <span class="bolinha-cor" style="background:#002349;"></span>
+                      <span class="bolinha-cor" style="background:#957C3D;"></span>
+                      <span class="bolinha-cor" style="background:#FFFFFF;"></span>
+                    </div>
+                  </button>
+
+                </div>
+              </div>
+
+              <div class="preview-tema-atual" style="margin-top: 18px;">
+                <h3 id="previewTemaNome">Tema Show</h3>
+                <p id="previewTemaDescricao">
+                  Tema atual com branco, laranja pôr do sol e vermelho-violeta.
+                </p>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+                  <button type="button" class="btn btn-principal">Botão principal</button>
+                  <button type="button" class="btn btn-secundario">Botão secundário</button>
+                  <button type="button" class="btn btn-claro">Botão claro</button>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px;">
+                <button type="submit" class="btn btn-principal">
+                  Salvar configurações
+                </button>
+
+                <button type="button" class="btn btn-claro" id="btnRestaurar">
+                  Restaurar exemplo
+                </button>
+              </div>
+            </section>
+
+          </div>
+
+          <aside>
+
+            <section class="card" style="margin-bottom: 20px;">
+              <h2>Resumo</h2>
+
+              <div class="mini-lista">
+                <div class="mini-item">
+                  <span>Profissional</span>
+                  <strong id="previewNome">Deise Domingues</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>Valor padrão</span>
+                  <strong id="previewValor">Não definido</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>Duração</span>
+                  <strong id="previewDuracao">50 minutos</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>Modalidade</span>
+                  <strong id="previewModalidade">Online</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>Tema atual</span>
+                  <strong id="previewTemaResumo">Show</strong>
+                </div>
+              </div>
+            </section>
+
+            <section class="card" style="margin-bottom: 20px;">
+              <h2>Segurança</h2>
+
+              <p class="subtitulo" style="margin-top: 8px;">
+                Como este sistema terá dados sensíveis, depois vamos usar login real, regras de acesso e proteção no Supabase.
+              </p>
+
+              <div class="tags" style="margin-top: 14px;">
+                <span class="tag">Login obrigatório</span>
+                <span class="tag">RLS</span>
+                <span class="tag">Dados sensíveis</span>
+              </div>
+            </section>
+
+            <section class="card">
+              <h2>Próximos ajustes</h2>
+
+              <div class="mini-lista">
+                <div class="mini-item">
+                  <span>1</span>
+                  <strong>Conectar Supabase Auth</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>2</span>
+                  <strong>Salvar perfil do psicólogo</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>3</span>
+                  <strong>Usar valor padrão na agenda</strong>
+                </div>
+
+                <div class="mini-item">
+                  <span>4</span>
+                  <strong>Gerar financeiro automaticamente</strong>
+                </div>
+              </div>
+            </section>
+
+          </aside>
+
+        </section>
+
+      </form>
+
+    </div>
+  </main>
+
+  <script src="js/tema.js"></script>
+  <script src="js/configuracoes.js"></script>
+</body>
+</html>

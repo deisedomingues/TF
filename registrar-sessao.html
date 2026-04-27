@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Sessão | Agenda Clínica</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">D</div>
+        <span>Agenda Clínica</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html">Pacientes</a>
+        <a href="registrar-sessao.html" class="ativo">Sessões</a>
+        <a href="financeiro.html">Financeiro</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <section class="cabecalho-pagina">
+        <h1>Registrar sessão</h1>
+        <p class="subtitulo">
+          Registre a sessão realizada, observações importantes e hashtags para facilitar buscas futuras.
+        </p>
+      </section>
+
+      <div class="aviso">
+        As anotações clínicas são informações sensíveis. Nesta primeira versão, estamos criando apenas o visual.
+        Depois vamos proteger o acesso com login e regras de segurança no Supabase.
+      </div>
+
+      <section class="card">
+        <form>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="paciente">Paciente</label>
+              <select id="paciente">
+                <option value="">Selecione um paciente</option>
+                <option>Maria Oliveira</option>
+                <option>João Santos</option>
+              </select>
+            </div>
+
+            <div class="form-grupo">
+              <label for="data">Data da sessão</label>
+              <input type="date" id="data" />
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="inicio">Horário de início</label>
+              <input type="time" id="inicio" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="fim">Horário de fim</label>
+              <input type="time" id="fim" />
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="modalidade">Modalidade</label>
+              <select id="modalidade">
+                <option>Presencial</option>
+                <option>Online</option>
+                <option>Híbrida</option>
+              </select>
+            </div>
+
+            <div class="form-grupo">
+              <label for="status">Status</label>
+              <select id="status">
+                <option>Agendada</option>
+                <option>Realizada</option>
+                <option>Cancelada pelo paciente</option>
+                <option>Cancelada pelo psicólogo</option>
+                <option>Falta</option>
+                <option>Remarcada</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="anotacoes">Anotações da sessão</label>
+            <textarea 
+              id="anotacoes"
+              placeholder="Escreva aqui o registro da sessão..."
+            ></textarea>
+          </div>
+
+          <div class="form-grupo">
+            <label for="hashtags">Hashtags</label>
+            <input 
+              type="text" 
+              id="hashtags"
+              placeholder="Exemplo: #ansiedade #trabalho #autoestima"
+            />
+          </div>
+
+          <button type="button" class="btn btn-principal">
+            Salvar sessão
+          </button>
+
+        </form>
+      </section>
+
+      <section style="margin-top: 24px;">
+        <h2>Exemplo de histórico</h2>
+
+        <div class="lista" style="margin-top: 12px;">
+
+          <article class="card">
+            <h3 style="color: var(--vermelho-violeta); margin-bottom: 6px;">
+              Maria Oliveira — 22/04/2026
+            </h3>
+
+            <p class="subtitulo">
+              Sessão realizada online. Paciente relatou ansiedade relacionada ao trabalho e dificuldade para dormir.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#ansiedade</span>
+              <span class="tag">#trabalho</span>
+              <span class="tag">#sono</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3 style="color: var(--vermelho-violeta); margin-bottom: 6px;">
+              João Santos — 20/04/2026
+            </h3>
+
+            <p class="subtitulo">
+              Sessão presencial. Conversa sobre rotina familiar e organização de tarefas.
+            </p>
+
+            <div class="tags">
+              <span class="tag">#família</span>
+              <span class="tag">#rotina</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

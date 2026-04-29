@@ -1,15 +1,24 @@
 :root {
   --branco: #FFFFFF;
 
-  --cor-fundo: #FFF7F4;
+  /* Cores da logo Amanda Souza */
+  --cor-fundo: #F6FBFC;
   --cor-card: #FFFFFF;
-  --cor-principal: #FF5841;
-  --cor-secundaria: #C53678;
-  --cor-texto: #2B2B2B;
-  --cor-texto-suave: #777777;
-  --cor-clara: #FFE7E0;
-  --cor-borda: #F0D8D2;
-  --cor-sombra: rgba(197, 54, 120, 0.12);
+
+  --cor-principal: #45B8CF;
+  --cor-secundaria: #463581;
+
+  --cor-principal-escura: #2E95AA;
+  --cor-secundaria-escura: #30245F;
+
+  --cor-texto: #252532;
+  --cor-texto-suave: #6F6B82;
+
+  --cor-clara: #EAF8FB;
+  --cor-clara-secundaria: #EEEAF8;
+
+  --cor-borda: #D7EEF3;
+  --cor-sombra: rgba(70, 53, 129, 0.14);
 
   --fundo: var(--cor-fundo);
   --laranja: var(--cor-principal);
@@ -20,13 +29,11 @@
   --borda: var(--cor-borda);
   --sombra: 0 8px 24px var(--cor-sombra);
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: linear-gradient(
@@ -749,4 +756,19 @@ body.tema-noite .tag {
     padding-right: 0;
     padding-bottom: 10px;
   }
+}
+.logo-login {
+  width: 300px;;
+  max-width: 95%;
+  display: block;
+  margin: 0 auto 24px auto;
+  object-fit: contain;
+
+}
+
+.rodape-login {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 0.85rem;
+  opacity: 0.8;
 }

@@ -4,17 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Configurações | Agenda Clínica</title>
+  <title>Configurações | Amanda Souza Fisioterapeuta</title>
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
+
 <body>
 
   <header class="topbar">
     <div class="container topbar-conteudo">
+
       <div class="marca">
-        <div class="marca-icone">D</div>
-        <span>Agenda Clínica</span>
+        <div class="marca-icone">A</div>
+        <div>
+          <span>Amanda Souza</span>
+          <small>Fisioterapeuta</small>
+        </div>
       </div>
 
       <nav class="menu">
@@ -27,6 +32,7 @@
         <a href="configuracoes.html" class="ativo">Configurações</a>
         <a href="login.html">Sair</a>
       </nav>
+
     </div>
   </header>
 
@@ -40,9 +46,12 @@
       </div>
 
       <section class="cabecalho-pagina">
+        <span class="etiqueta-pagina">Preferências do sistema</span>
+
         <h1>Configurações</h1>
+
         <p class="subtitulo">
-          Ajuste os dados do profissional, preferências de atendimento, valores padrão e tema visual do sistema.
+          Ajuste os dados da profissional, preferências de atendimento, valores padrão e identidade visual do sistema.
         </p>
       </section>
 
@@ -57,10 +66,10 @@
           <div>
 
             <section class="card" style="margin-bottom: 20px;">
-              <h2>Dados do profissional</h2>
+              <h2>Dados da profissional</h2>
 
               <p class="subtitulo" style="margin-bottom: 18px;">
-                Essas informações poderão aparecer em relatórios, recibos e identificação interna do sistema.
+                Essas informações poderão aparecer em relatórios, recibos, agenda e identificação interna do sistema.
               </p>
 
               <div class="linha-form">
@@ -69,17 +78,17 @@
                   <input 
                     type="text" 
                     id="nomeProfissional" 
-                    value="Deise Domingues"
+                    value="Amanda Souza"
                     required
                   />
                 </div>
 
                 <div class="form-grupo">
-                  <label for="crp">CRP</label>
+                  <label for="registroProfissional">Registro profissional</label>
                   <input 
                     type="text" 
-                    id="crp" 
-                    placeholder="Ex: CRP 06/000000"
+                    id="registroProfissional" 
+                    placeholder="Ex: CREFITO 000000-F"
                   />
                 </div>
               </div>
@@ -117,7 +126,7 @@
                 <label for="bioProfissional">Descrição profissional</label>
                 <textarea 
                   id="bioProfissional"
-                  placeholder="Ex: Psicóloga clínica com atendimento para adultos..."
+                  placeholder="Ex: Fisioterapeuta especializada em reabilitação, dor, postura e mobilidade..."
                 ></textarea>
               </div>
             </section>
@@ -126,7 +135,7 @@
               <h2>Preferências de atendimento</h2>
 
               <p class="subtitulo" style="margin-bottom: 18px;">
-                Esses dados podem ser usados automaticamente na agenda e no financeiro.
+                Esses dados podem ser usados automaticamente na agenda, no cadastro de sessões e no financeiro.
               </p>
 
               <div class="linha-form">
@@ -146,8 +155,8 @@
                   <select id="duracaoPadrao">
                     <option value="30">30 minutos</option>
                     <option value="45">45 minutos</option>
-                    <option value="50" selected>50 minutos</option>
-                    <option value="60">60 minutos</option>
+                    <option value="50">50 minutos</option>
+                    <option value="60" selected>60 minutos</option>
                     <option value="90">90 minutos</option>
                   </select>
                 </div>
@@ -157,8 +166,9 @@
                 <div class="form-grupo">
                   <label for="modalidadePadrao">Modalidade padrão</label>
                   <select id="modalidadePadrao">
-                    <option>Presencial</option>
-                    <option selected>Online</option>
+                    <option selected>Presencial</option>
+                    <option>Online</option>
+                    <option>Domiciliar</option>
                     <option>Híbrida</option>
                   </select>
                 </div>
@@ -190,7 +200,7 @@
                 <div class="form-grupo">
                   <label for="formaPagamentoPadrao">Forma de pagamento mais usada</label>
                   <select id="formaPagamentoPadrao">
-                    <option>Pix</option>
+                    <option selected>Pix</option>
                     <option>Dinheiro</option>
                     <option>Cartão de crédito</option>
                     <option>Cartão de débito</option>
@@ -201,10 +211,10 @@
             </section>
 
             <section class="card">
-              <h2>Preferências visuais</h2>
+              <h2>Identidade visual</h2>
 
               <p class="subtitulo" style="margin-bottom: 18px;">
-                Escolha um tema pronto para mudar a aparência do sistema. Nesta versão, a escolha fica salva no navegador.
+                O sistema está usando o tema personalizado da Amanda Souza, baseado nas cores da logo.
               </p>
 
               <div class="form-grupo">
@@ -212,77 +222,25 @@
                 <input 
                   type="text" 
                   id="nomeSistema" 
-                  value="Agenda Clínica"
+                  value="Agenda Amanda Souza"
                 />
               </div>
 
-              <div class="form-grupo">
-                <label>Tema visual</label>
-
-                <div class="opcoes-tema">
-
-                  <button type="button" class="opcao-tema ativo" data-tema="show">
-                    <div class="info-tema">
-                      <strong>Show</strong>
-                      <span>Branco, laranja pôr do sol e vermelho-violeta</span>
-                    </div>
-
-                    <div class="amostras-tema">
-                      <span class="bolinha-cor" style="background:#FFFFFF;"></span>
-                      <span class="bolinha-cor" style="background:#FF5841;"></span>
-                      <span class="bolinha-cor" style="background:#C53678;"></span>
-                    </div>
-                  </button>
-
-                  <button type="button" class="opcao-tema" data-tema="ceu">
-                    <div class="info-tema">
-                      <strong>Céu</strong>
-                      <span>Azul claro, azul brilhante e branco</span>
-                    </div>
-
-                    <div class="amostras-tema">
-                      <span class="bolinha-cor" style="background:#E9F1FA;"></span>
-                      <span class="bolinha-cor" style="background:#00ABE4;"></span>
-                      <span class="bolinha-cor" style="background:#FFFFFF;"></span>
-                    </div>
-                  </button>
-
-                  <button type="button" class="opcao-tema" data-tema="noite">
-                    <div class="info-tema">
-                      <strong>Noite</strong>
-                      <span>Azul escuro, turquesa e dourado</span>
-                    </div>
-
-                    <div class="amostras-tema">
-                      <span class="bolinha-cor" style="background:#0A1828;"></span>
-                      <span class="bolinha-cor" style="background:#178582;"></span>
-                      <span class="bolinha-cor" style="background:#BFA181;"></span>
-                    </div>
-                  </button>
-
-                  <button type="button" class="opcao-tema" data-tema="casual">
-                    <div class="info-tema">
-                      <strong>Casual</strong>
-                      <span>Azul escuro e dourado</span>
-                    </div>
-
-                    <div class="amostras-tema">
-                      <span class="bolinha-cor" style="background:#002349;"></span>
-                      <span class="bolinha-cor" style="background:#957C3D;"></span>
-                      <span class="bolinha-cor" style="background:#FFFFFF;"></span>
-                    </div>
-                  </button>
-
-                </div>
-              </div>
-
               <div class="preview-tema-atual" style="margin-top: 18px;">
-                <h3 id="previewTemaNome">Tema Show</h3>
+                <h3 id="previewTemaNome">Tema Amanda Souza</h3>
+
                 <p id="previewTemaDescricao">
-                  Tema atual com branco, laranja pôr do sol e vermelho-violeta.
+                  Tema com roxo principal, azul turquesa, fundo claro e cartões brancos.
                 </p>
 
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px;">
+                <div class="amostras-tema" style="margin-top: 14px;">
+                  <span class="bolinha-cor" style="background:#FFFFFF;"></span>
+                  <span class="bolinha-cor" style="background:#463581;"></span>
+                  <span class="bolinha-cor" style="background:#45B8CF;"></span>
+                  <span class="bolinha-cor" style="background:#EAF8FB;"></span>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
                   <button type="button" class="btn btn-principal">Botão principal</button>
                   <button type="button" class="btn btn-secundario">Botão secundário</button>
                   <button type="button" class="btn btn-claro">Botão claro</button>
@@ -310,7 +268,7 @@
               <div class="mini-lista">
                 <div class="mini-item">
                   <span>Profissional</span>
-                  <strong id="previewNome">Deise Domingues</strong>
+                  <strong id="previewNome">Amanda Souza</strong>
                 </div>
 
                 <div class="mini-item">
@@ -320,17 +278,17 @@
 
                 <div class="mini-item">
                   <span>Duração</span>
-                  <strong id="previewDuracao">50 minutos</strong>
+                  <strong id="previewDuracao">60 minutos</strong>
                 </div>
 
                 <div class="mini-item">
                   <span>Modalidade</span>
-                  <strong id="previewModalidade">Online</strong>
+                  <strong id="previewModalidade">Presencial</strong>
                 </div>
 
                 <div class="mini-item">
                   <span>Tema atual</span>
-                  <strong id="previewTemaResumo">Show</strong>
+                  <strong id="previewTemaResumo">Amanda Souza</strong>
                 </div>
               </div>
             </section>
@@ -339,7 +297,7 @@
               <h2>Segurança</h2>
 
               <p class="subtitulo" style="margin-top: 8px;">
-                Como este sistema terá dados sensíveis, depois vamos usar login real, regras de acesso e proteção no Supabase.
+                Como este sistema terá dados sensíveis de pacientes, depois vamos usar login real, regras de acesso e proteção no Supabase.
               </p>
 
               <div class="tags" style="margin-top: 14px;">
@@ -360,7 +318,7 @@
 
                 <div class="mini-item">
                   <span>2</span>
-                  <strong>Salvar perfil do psicólogo</strong>
+                  <strong>Salvar perfil da fisioterapeuta</strong>
                 </div>
 
                 <div class="mini-item">
@@ -384,7 +342,6 @@
     </div>
   </main>
 
-  <script src="js/tema.js"></script>
   <script src="js/configuracoes.js"></script>
 </body>
 </html>

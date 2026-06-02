@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Home | Amanda Souza Fisioterapeuta</title>
+  <title>Home | Tatiely Psicologia</title>
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -15,18 +15,18 @@
     <div class="container topbar-conteudo">
 
       <div class="marca">
-        <div class="marca-icone">A</div>
+        <div class="marca-icone" id="marcaIcone">T</div>
         <div>
-          <span>Amanda Souza</span>
-          <small>Fisioterapeuta</small>
+          <span id="nomeTopo">Tatiely Flávio</span>
+          <small id="subtituloTopo">Psicóloga Perinatal, Parental e Bebês</small>
         </div>
       </div>
 
       <nav class="menu">
         <a href="home.html" class="ativo">Início</a>
-        <a href="pacientes.html">Pacientes</a>
         <a href="registrar-sessao.html">Sessões</a>
         <a href="agenda.html">Agenda</a>
+        <a href="pacientes.html">Pacientes</a>
         <a href="buscar-hashtags.html">Hashtags</a>
         <a href="financeiro.html">Financeiro</a>
         <a href="login.html">Sair</a>
@@ -39,12 +39,10 @@
     <div class="container">
 
       <section class="cabecalho-pagina">
-        <span class="etiqueta-pagina">Painel inicial</span>
-
-        <h1>Olá, Amanda Souza</h1>
+        <h1 id="tituloBoasVindas">Olá, Tatiely</h1>
 
         <p class="subtitulo">
-          Acompanhe seus pacientes, sessões, agenda e recebimentos em um só lugar.
+          Acompanhe seus atendimentos, pacientes, agenda e recebimentos em um só lugar.
         </p>
       </section>
 
@@ -52,74 +50,63 @@
 
         <div class="card-indicador">
           <span>Pacientes ativos</span>
-          <strong>12</strong>
+          <strong id="totalPacientesAtivos">0</strong>
         </div>
 
         <div class="card-indicador">
-          <span>Sessões este mês</span>
-          <strong>38</strong>
+          <span>Atendimentos do mês</span>
+          <strong id="totalSessoesMes">0</strong>
         </div>
 
-        <div class="card-indicador">
+        <div class="card-indicador card-proxima-sessao">
           <span>Próxima sessão</span>
-          <strong>14h</strong>
+          <strong id="proximaSessao">--</strong>
+          <small id="detalheProximaSessao">Nenhuma sessão agendada.</small>
         </div>
 
         <div class="card-indicador">
           <span>Financeiro pendente</span>
-          <strong>R$ 850</strong>
+          <strong id="financeiroPendente">R$ 0,00</strong>
         </div>
 
       </section>
 
       <section class="grid-acoes">
 
-        <a href="pacientes.html" class="card-acao">
-          <div class="icone">👥</div>
-          <h3>Pacientes</h3>
-          <p>
-            Cadastre, consulte e organize as informações principais dos pacientes.
-          </p>
-        </a>
-
         <a href="registrar-sessao.html" class="card-acao">
           <div class="icone">📝</div>
           <h3>Registrar sessão</h3>
-          <p>
-            Registre sessões realizadas, evolução clínica, observações e hashtags.
-          </p>
-        </a>
-
-        <a href="financeiro.html" class="card-acao">
-          <div class="icone">💰</div>
-          <h3>Financeiro</h3>
-          <p>
-            Acompanhe pagamentos pendentes, valores recebidos e sessões não pagas.
-          </p>
+          <p>Registre atendimentos realizados, observações clínicas e hashtags.</p>
         </a>
 
         <a href="agenda.html" class="card-acao">
           <div class="icone">📅</div>
           <h3>Agenda</h3>
-          <p>
-            Visualize compromissos do dia, da semana ou do mês.
-          </p>
+          <p>Cadastre e acompanhe os atendimentos futuros.</p>
+        </a>
+
+        <a href="pacientes.html" class="card-acao">
+          <div class="icone">👥</div>
+          <h3>Cadastro de pacientes</h3>
+          <p>Cadastre, consulte e organize as informações principais dos pacientes.</p>
+        </a>
+
+        <a href="financeiro.html" class="card-acao">
+          <div class="icone">💰</div>
+          <h3>Financeiro</h3>
+          <p>Acompanhe pagamentos pendentes, valores recebidos e sessões não pagas.</p>
         </a>
 
         <a href="buscar-hashtags.html" class="card-acao">
           <div class="icone">🏷️</div>
           <h3>Buscar por hashtag</h3>
-          <p>
-            Encontre sessões relacionadas a temas como dor, postura, mobilidade ou retorno.
-          </p>
+          <p>Encontre sessões relacionadas a temas como ansiedade, rotina ou autoestima.</p>
         </a>
 
         <a href="configuracoes.html" class="card-acao">
           <div class="icone">⚙️</div>
           <h3>Configurações</h3>
-          <p>
-            Ajuste dados da profissional, valores padrão e preferências do sistema.
-          </p>
+          <p>Ajuste dados da profissional, site público, valores e preferências.</p>
         </a>
 
       </section>
@@ -127,6 +114,9 @@
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
   <script src="js/home.js"></script>
 </body>
 </html>

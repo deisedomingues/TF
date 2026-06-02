@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Editar Site | Tatiely Psicologia</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="container topbar-conteudo">
+      <div class="marca">
+        <div class="marca-icone">T</div>
+        <span>Tatiely Psicologia</span>
+      </div>
+
+      <nav class="menu">
+        <a href="home.html">Início</a>
+        <a href="pacientes.html">Pacientes</a>
+        <a href="registrar-sessao.html">Sessões</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="buscar-hashtags.html">Hashtags</a>
+        <a href="financeiro.html">Financeiro</a>
+        <a href="editar-site.html" class="ativo">Editar site</a>
+        <a href="login.html">Sair</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div class="container">
+
+      <section class="cabecalho-pagina">
+        <h1>Editar site público</h1>
+        <p class="subtitulo">
+          Altere textos, contatos, links de venda e imagens exibidas na página inicial do site.
+        </p>
+      </section>
+
+      <section class="card">
+        <form id="formEditarSite">
+
+          <h2>Informações principais</h2>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="nomeProfissional">Nome profissional</label>
+              <input type="text" id="nomeProfissional" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="subtitulo">Subtítulo</label>
+              <input type="text" id="subtitulo" />
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="chamadaPrincipal">Chamada principal</label>
+            <textarea id="chamadaPrincipal"></textarea>
+          </div>
+
+          <h2 style="margin-top: 30px;">Sobre</h2>
+
+          <div class="form-grupo">
+            <label for="textoSobre1">Texto sobre 1</label>
+            <textarea id="textoSobre1"></textarea>
+          </div>
+
+          <div class="form-grupo">
+            <label for="textoSobre2">Texto sobre 2</label>
+            <textarea id="textoSobre2"></textarea>
+          </div>
+
+          <div class="form-grupo">
+            <label for="textoSobre3">Texto sobre 3</label>
+            <textarea id="textoSobre3"></textarea>
+          </div>
+
+          <h2 style="margin-top: 30px;">Por que confiar?</h2>
+
+          <div class="form-grupo">
+            <label for="textoConfiar">Texto principal</label>
+            <textarea id="textoConfiar"></textarea>
+          </div>
+
+          <h2 style="margin-top: 30px;">Contato</h2>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="whatsapp">WhatsApp com DDD</label>
+              <input type="text" id="whatsapp" placeholder="Ex: 5511961869338" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="instagram">Instagram</label>
+              <input type="url" id="instagram" />
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="site">Site</label>
+            <input type="url" id="site" />
+          </div>
+
+          <h2 style="margin-top: 30px;">Links dos materiais</h2>
+
+          <div class="form-grupo">
+            <label for="linkLivroPerinatal">Livro Psicologia Perinatal</label>
+            <input type="url" id="linkLivroPerinatal" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="linkChecklist">E-book Check-list Enxoval</label>
+            <input type="url" id="linkChecklist" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="linkDesmame">E-book Desmame Gentil</label>
+            <input type="url" id="linkDesmame" />
+          </div>
+
+          <h2 style="margin-top: 30px;">Imagens</h2>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="fotoPerfil">Foto principal / perfil</label>
+              <input type="file" id="fotoPerfil" accept="image/*" />
+              <img id="previewFotoPerfil" class="preview-edicao-site" alt="Prévia da foto de perfil" />
+            </div>
+
+            <div class="form-grupo">
+                <label for="fotoFamilia">Foto da família / seção Sobre</label>
+                <input type="file" id="fotoFamilia" accept="image/*" />
+                <img id="previewFotoFamilia" class="preview-edicao-site" alt="Prévia da foto da família" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="fotoLivro">Foto com livro</label>
+              <input type="file" id="fotoLivro" accept="image/*" />
+              <img id="previewFotoLivro" class="preview-edicao-site" alt="Prévia da foto com livro" />
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="capaPsicologia">Capa Psicologia Perinatal</label>
+              <input type="file" id="capaPsicologia" accept="image/*" />
+              <img id="previewCapaPsicologia" class="preview-edicao-site" alt="Prévia da capa Psicologia Perinatal" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="capaChecklist">Capa Checklist Maternidade</label>
+              <input type="file" id="capaChecklist" accept="image/*" />
+              <img id="previewCapaChecklist" class="preview-edicao-site" alt="Prévia da capa Checklist" />
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="capaDesmame">Capa Desmame Gentil</label>
+            <input type="file" id="capaDesmame" accept="image/*" />
+            <img id="previewCapaDesmame" class="preview-edicao-site" alt="Prévia da capa Desmame Gentil" />
+          </div>
+
+          <button type="submit" class="btn btn-principal" id="btnSalvarSite">
+            Salvar alterações
+          </button>
+
+          <a href="index.html" target="_blank" class="btn btn-claro">
+            Ver site público
+          </a>
+
+          <p id="mensagemSite" class="mensagem-form" style="margin-top: 14px;"></p>
+
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/editar-site.js"></script>
+</body>
+</html>

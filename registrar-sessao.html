@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registrar Sessão | Agenda Clínica</title>
+
+  <title>Registrar Sessão | Tatiely Psicologia</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -11,14 +13,16 @@
   <header class="topbar">
     <div class="container topbar-conteudo">
       <div class="marca">
-        <div class="marca-icone">D</div>
-        <span>Agenda Clínica</span>
+        <div class="marca-icone">T</div>
+        <span>Tatiely Psicologia</span>
       </div>
 
       <nav class="menu">
         <a href="home.html">Início</a>
         <a href="pacientes.html">Pacientes</a>
         <a href="registrar-sessao.html" class="ativo">Sessões</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="buscar-hashtags.html">Hashtags</a>
         <a href="financeiro.html">Financeiro</a>
         <a href="login.html">Sair</a>
       </nav>
@@ -35,27 +39,50 @@
         </p>
       </section>
 
-      <div class="aviso">
-        As anotações clínicas são informações sensíveis. Nesta primeira versão, estamos criando apenas o visual.
-        Depois vamos proteger o acesso com login e regras de segurança no Supabase.
-      </div>
+      <section class="card" style="margin-bottom: 24px;">
+        <div class="barra-acoes">
+          <div>
+            <h2>Atendimentos de hoje</h2>
+            <p class="subtitulo">
+              Selecione um atendimento da agenda para preencher o formulário automaticamente.
+            </p>
+          </div>
+
+          <span class="tag" id="tagAtendimentosHoje">0 atendimentos</span>
+        </div>
+
+        <div class="lista" id="listaAtendimentosHoje"></div>
+      </section>
 
       <section class="card">
-        <form>
+        <div class="barra-acoes" style="margin-bottom: 18px;">
+          <div>
+            <h2>Formulário da sessão</h2>
+            <p class="subtitulo" id="textoModoFormulario">
+              Preencha manualmente ou selecione um atendimento de hoje acima.
+            </p>
+          </div>
+
+          <button type="button" class="btn btn-claro" id="btnLimparAgendamento" style="display: none;">
+            Limpar seleção
+          </button>
+        </div>
+
+        <form id="formSessao">
+
+          <input type="hidden" id="agendamentoId" />
 
           <div class="linha-form">
             <div class="form-grupo">
               <label for="paciente">Paciente</label>
-              <select id="paciente">
-                <option value="">Selecione um paciente</option>
-                <option>Maria Oliveira</option>
-                <option>João Santos</option>
+              <select id="paciente" required>
+                <option value="">Carregando pacientes...</option>
               </select>
             </div>
 
             <div class="form-grupo">
               <label for="data">Data da sessão</label>
-              <input type="date" id="data" />
+              <input type="date" id="data" required />
             </div>
           </div>
 
@@ -75,21 +102,21 @@
             <div class="form-grupo">
               <label for="modalidade">Modalidade</label>
               <select id="modalidade">
-                <option>Presencial</option>
-                <option>Online</option>
-                <option>Híbrida</option>
+                <option value="Presencial">Presencial</option>
+                <option value="Online">Online</option>
+                <option value="Híbrida">Híbrida</option>
               </select>
             </div>
 
             <div class="form-grupo">
               <label for="status">Status</label>
               <select id="status">
-                <option>Agendada</option>
-                <option>Realizada</option>
-                <option>Cancelada pelo paciente</option>
-                <option>Cancelada pelo psicólogo</option>
-                <option>Falta</option>
-                <option>Remarcada</option>
+                <option value="Realizada">Realizada</option>
+                <option value="Agendada">Agendada</option>
+                <option value="Cancelada pelo paciente">Cancelada pelo paciente</option>
+                <option value="Cancelada pelo psicólogo">Cancelada pelo psicólogo</option>
+                <option value="Falta">Falta</option>
+                <option value="Remarcada">Remarcada</option>
               </select>
             </div>
           </div>
@@ -111,54 +138,21 @@
             />
           </div>
 
-          <button type="button" class="btn btn-principal">
+          <button type="submit" class="btn btn-principal" id="btnSalvarSessao">
             Salvar sessão
           </button>
 
+          <p id="mensagemSessao" class="mensagem-form" style="margin-top: 14px;"></p>
+
         </form>
-      </section>
-
-      <section style="margin-top: 24px;">
-        <h2>Exemplo de histórico</h2>
-
-        <div class="lista" style="margin-top: 12px;">
-
-          <article class="card">
-            <h3 style="color: var(--vermelho-violeta); margin-bottom: 6px;">
-              Maria Oliveira — 22/04/2026
-            </h3>
-
-            <p class="subtitulo">
-              Sessão realizada online. Paciente relatou ansiedade relacionada ao trabalho e dificuldade para dormir.
-            </p>
-
-            <div class="tags">
-              <span class="tag">#ansiedade</span>
-              <span class="tag">#trabalho</span>
-              <span class="tag">#sono</span>
-            </div>
-          </article>
-
-          <article class="card">
-            <h3 style="color: var(--vermelho-violeta); margin-bottom: 6px;">
-              João Santos — 20/04/2026
-            </h3>
-
-            <p class="subtitulo">
-              Sessão presencial. Conversa sobre rotina familiar e organização de tarefas.
-            </p>
-
-            <div class="tags">
-              <span class="tag">#família</span>
-              <span class="tag">#rotina</span>
-            </div>
-          </article>
-
-        </div>
       </section>
 
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/registrar-sessao.js"></script>
 </body>
 </html>

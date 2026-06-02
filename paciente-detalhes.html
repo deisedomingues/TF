@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Detalhes do Paciente | Agenda Clínica</title>
+  <title>Detalhes do Paciente | Tatiely Psicologia</title>
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
@@ -13,8 +13,8 @@
   <header class="topbar">
     <div class="container topbar-conteudo">
       <div class="marca">
-        <div class="marca-icone">D</div>
-        <span>Agenda Clínica</span>
+        <div class="marca-icone">T</div>
+        <span>Tatiely Psicologia</span>
       </div>
 
       <nav class="menu">
@@ -22,6 +22,7 @@
         <a href="pacientes.html" class="ativo">Pacientes</a>
         <a href="registrar-sessao.html">Sessões</a>
         <a href="agenda.html">Agenda</a>
+        <a href="buscar-hashtags.html">Hashtags</a>
         <a href="financeiro.html">Financeiro</a>
         <a href="login.html">Sair</a>
       </nav>
@@ -38,7 +39,7 @@
       </div>
 
       <section class="cabecalho-pagina">
-        <h1>Maria Oliveira</h1>
+        <h1 id="nomePacienteTitulo">Carregando...</h1>
         <p class="subtitulo">
           Detalhes do paciente, histórico de sessões, anotações e financeiro.
         </p>
@@ -47,28 +48,27 @@
       <section class="grid-cards">
         <div class="card-indicador">
           <span>Sessões realizadas</span>
-          <strong>18</strong>
+          <strong id="totalSessoesRealizadas">0</strong>
         </div>
 
         <div class="card-indicador">
           <span>Próxima sessão</span>
-          <strong>27/04</strong>
+          <strong id="proximaSessao">--</strong>
         </div>
 
         <div class="card-indicador">
           <span>Financeiro pendente</span>
-          <strong>R$ 150</strong>
+          <strong id="financeiroPendente">R$ 0,00</strong>
         </div>
 
         <div class="card-indicador">
           <span>Faltas</span>
-          <strong>2</strong>
+          <strong id="totalFaltas">0</strong>
         </div>
       </section>
 
       <section class="layout-detalhes-paciente">
 
-        <!-- COLUNA PRINCIPAL -->
         <div>
 
           <section class="card" style="margin-bottom: 20px;">
@@ -80,7 +80,7 @@
                 </p>
               </div>
 
-              <button type="button" class="btn btn-claro">
+              <button type="button" class="btn btn-claro" id="btnEditarPaciente">
                 Editar dados
               </button>
             </div>
@@ -88,32 +88,32 @@
             <div class="grid-info-paciente">
               <div>
                 <span class="label-info">Nome completo</span>
-                <strong>Maria Oliveira</strong>
+                <strong id="infoNome">--</strong>
               </div>
 
               <div>
                 <span class="label-info">Data de nascimento</span>
-                <strong>12/08/1992</strong>
+                <strong id="infoNascimento">--</strong>
               </div>
 
               <div>
                 <span class="label-info">Telefone</span>
-                <strong>(11) 99999-0000</strong>
+                <strong id="infoTelefone">--</strong>
               </div>
 
               <div>
                 <span class="label-info">E-mail</span>
-                <strong>maria@email.com</strong>
+                <strong id="infoEmail">--</strong>
               </div>
 
               <div>
                 <span class="label-info">Contato de emergência</span>
-                <strong>Ana Oliveira — mãe</strong>
+                <strong id="infoContatoEmergencia">--</strong>
               </div>
 
               <div>
                 <span class="label-info">Status</span>
-                <strong>Ativo</strong>
+                <strong id="infoStatus">--</strong>
               </div>
             </div>
           </section>
@@ -127,7 +127,7 @@
                 </p>
               </div>
 
-              <a href="registrar-sessao.html" class="btn btn-principal">
+              <a href="registrar-sessao.html" class="btn btn-principal" id="linkRegistrarSessao">
                 + Registrar sessão
               </a>
             </div>
@@ -141,91 +141,26 @@
               />
             </div>
 
-            <div class="lista">
-
-              <article class="sessao-card">
-                <div class="sessao-topo">
-                  <div>
-                    <h3>22/04/2026 — Sessão online</h3>
-                    <p>Realizada das 14:00 às 15:00</p>
-                  </div>
-
-                  <span class="tag">Realizada</span>
-                </div>
-
-                <p class="texto-sessao">
-                  Paciente relatou ansiedade relacionada ao trabalho, especialmente antes de reuniões.
-                  Foram conversadas estratégias de organização da rotina e identificação de pensamentos automáticos.
-                </p>
-
-                <div class="tags">
-                  <span class="tag">#ansiedade</span>
-                  <span class="tag">#trabalho</span>
-                  <span class="tag">#rotina</span>
-                </div>
-              </article>
-
-              <article class="sessao-card">
-                <div class="sessao-topo">
-                  <div>
-                    <h3>15/04/2026 — Sessão presencial</h3>
-                    <p>Realizada das 14:00 às 15:00</p>
-                  </div>
-
-                  <span class="tag">Realizada</span>
-                </div>
-
-                <p class="texto-sessao">
-                  Sessão focada em questões familiares e limites pessoais.
-                  Paciente trouxe situações recentes de conflito e dificuldade em expressar necessidades.
-                </p>
-
-                <div class="tags">
-                  <span class="tag">#família</span>
-                  <span class="tag">#limites</span>
-                </div>
-              </article>
-
-              <article class="sessao-card">
-                <div class="sessao-topo">
-                  <div>
-                    <h3>08/04/2026 — Sessão online</h3>
-                    <p>Remarcada para 15/04/2026</p>
-                  </div>
-
-                  <span class="tag">Remarcada</span>
-                </div>
-
-                <p class="texto-sessao">
-                  Sessão originalmente agendada, mas remarcada a pedido da paciente.
-                </p>
-
-                <div class="tags">
-                  <span class="tag">#remarcação</span>
-                </div>
-              </article>
-
-            </div>
+            <div class="lista" id="listaSessoes"></div>
           </section>
 
         </div>
 
-        <!-- COLUNA LATERAL -->
         <aside>
 
           <section class="card" style="margin-bottom: 20px;">
             <h2>Ações rápidas</h2>
 
             <div class="acoes-laterais">
-              <a href="registrar-sessao.html" class="btn btn-principal btn-largura-total">
+              <a href="registrar-sessao.html" class="btn btn-principal btn-largura-total" id="linkNovaSessao">
                 Registrar nova sessão
               </a>
 
-              <a href="agenda.html" class="btn btn-secundario btn-largura-total">
+              <a href="agenda.html" class="btn btn-secundario btn-largura-total" id="linkNovoAgendamento">
                 Novo agendamento
               </a>
 
-              <a href="financeiro.html" class="btn btn-claro btn-largura-total">
+              <a href="financeiro.html" class="btn btn-claro btn-largura-total" id="linkFinanceiro">
                 Ver financeiro
               </a>
             </div>
@@ -233,14 +168,7 @@
 
           <section class="card" style="margin-bottom: 20px;">
             <h2>Hashtags frequentes</h2>
-
-            <div class="tags" style="margin-top: 12px;">
-              <span class="tag">#ansiedade</span>
-              <span class="tag">#trabalho</span>
-              <span class="tag">#família</span>
-              <span class="tag">#sono</span>
-              <span class="tag">#rotina</span>
-            </div>
+            <div class="tags" id="hashtagsFrequentes" style="margin-top: 12px;"></div>
           </section>
 
           <section class="card" style="margin-bottom: 20px;">
@@ -248,18 +176,18 @@
 
             <div class="mini-lista">
               <div class="mini-item">
-                <span>Última sessão</span>
-                <strong>Pago</strong>
+                <span>Último pagamento</span>
+                <strong id="ultimoPagamento">--</strong>
               </div>
 
               <div class="mini-item">
-                <span>Próxima cobrança</span>
-                <strong>R$ 150,00</strong>
+                <span>Total pendente</span>
+                <strong id="totalPendenteLateral">R$ 0,00</strong>
               </div>
 
               <div class="mini-item">
                 <span>Status geral</span>
-                <strong>Pendente</strong>
+                <strong id="statusFinanceiro">Sem pendências</strong>
               </div>
             </div>
           </section>
@@ -267,8 +195,8 @@
           <section class="card">
             <h2>Observações gerais</h2>
 
-            <p class="subtitulo" style="margin-top: 8px;">
-              Paciente prefere atendimento online. Costuma manter sessões às quartas-feiras no período da tarde.
+            <p class="subtitulo" id="observacoesGerais" style="margin-top: 8px;">
+              Nenhuma observação cadastrada.
             </p>
           </section>
 
@@ -279,7 +207,9 @@
     </div>
   </main>
 
- <script src="js/tema.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
   <script src="js/paciente-detalhes.js"></script>
 </body>
 </html>

@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pacientes | Agenda Clínica</title>
+
+  <title>Pacientes | Tatiely Psicologia</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -11,14 +13,16 @@
   <header class="topbar">
     <div class="container topbar-conteudo">
       <div class="marca">
-        <div class="marca-icone">D</div>
-        <span>Agenda Clínica</span>
+        <div class="marca-icone">T</div>
+        <span>Tatiely Psicologia</span>
       </div>
 
       <nav class="menu">
         <a href="home.html">Início</a>
         <a href="pacientes.html" class="ativo">Pacientes</a>
         <a href="registrar-sessao.html">Sessões</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="buscar-hashtags.html">Hashtags</a>
         <a href="financeiro.html">Financeiro</a>
         <a href="login.html">Sair</a>
       </nav>
@@ -38,11 +42,11 @@
       <section class="card" style="margin-bottom: 24px;">
         <h2>Novo paciente</h2>
 
-        <form>
+        <form id="formPaciente">
           <div class="linha-form">
             <div class="form-grupo">
               <label for="nome">Nome completo</label>
-              <input type="text" id="nome" placeholder="Nome do paciente" />
+              <input type="text" id="nome" placeholder="Nome do paciente" required />
             </div>
 
             <div class="form-grupo">
@@ -63,14 +67,43 @@
             </div>
           </div>
 
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="contatoEmergenciaNome">Contato de emergência</label>
+              <input type="text" id="contatoEmergenciaNome" placeholder="Nome da pessoa" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="contatoEmergenciaTelefone">Telefone do contato</label>
+              <input type="text" id="contatoEmergenciaTelefone" placeholder="(00) 00000-0000" />
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="contatoEmergenciaParentesco">Parentesco</label>
+              <input type="text" id="contatoEmergenciaParentesco" placeholder="Ex: mãe, irmã, esposo..." />
+            </div>
+
+            <div class="form-grupo">
+              <label for="status">Status</label>
+              <select id="status">
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+              </select>
+            </div>
+          </div>
+
           <div class="form-grupo">
             <label for="observacoes">Observações iniciais</label>
             <textarea id="observacoes" placeholder="Informações gerais sobre o paciente"></textarea>
           </div>
 
-          <button type="button" class="btn btn-principal">
+          <button type="submit" class="btn btn-principal" id="btnSalvarPaciente">
             Salvar paciente
           </button>
+
+          <p id="mensagemPaciente" class="mensagem-form" style="margin-top: 14px;"></p>
         </form>
       </section>
 
@@ -80,38 +113,21 @@
 
           <input 
             type="text" 
+            id="buscaPaciente"
             placeholder="Buscar paciente..."
             style="max-width: 280px;"
           />
         </div>
 
-        <div class="lista">
-
-          <article class="item-lista">
-            <div>
-              <h3>Maria Oliveira</h3>
-              <p>Telefone: (11) 99999-0000</p>
-              <p>E-mail: maria@email.com</p>
-            </div>
-
-            <a href="paciente-detalhes.html" class="btn btn-secundario">Ver histórico</a>
-          </article>
-
-          <article class="item-lista">
-            <div>
-              <h3>João Santos</h3>
-              <p>Telefone: (11) 98888-1111</p>
-              <p>E-mail: joao@email.com</p>
-            </div>
-
-            <a href="paciente-detalhes.html" class="btn btn-secundario">Ver histórico</a>
-          </article>
-
-        </div>
+        <div class="lista" id="listaPacientes"></div>
       </section>
 
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/pacientes.js"></script>
 </body>
 </html>

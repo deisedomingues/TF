@@ -32,19 +32,23 @@
   <main class="conteudo">
     <div class="container">
 
+      <a href="agenda.html" class="subtitulo" style="display: inline-block; margin-bottom: 16px; text-decoration: none;">
+        ← Voltar
+      </a>
+
       <section class="cabecalho-pagina">
         <h1>Registrar sessão</h1>
         <p class="subtitulo">
-          Registre a sessão realizada, observações importantes e hashtags para facilitar buscas futuras.
+          Selecione um atendimento pendente para preencher o registro da sessão.
         </p>
       </section>
 
       <section class="card" style="margin-bottom: 24px;">
         <div class="barra-acoes">
           <div>
-            <h2>Atendimentos de hoje</h2>
+            <h2>Atendimentos de hoje pendentes de registro</h2>
             <p class="subtitulo">
-              Selecione um atendimento da agenda para preencher o formulário automaticamente.
+              Clique em preencher registro para abrir o formulário da sessão.
             </p>
           </div>
 
@@ -54,17 +58,32 @@
         <div class="lista" id="listaAtendimentosHoje"></div>
       </section>
 
-      <section class="card">
+      <section class="card" id="cardPendenciasAnteriores" style="margin-bottom: 24px; display: none;">
+        <div class="barra-acoes">
+          <div>
+            <h2>Registros anteriores pendentes</h2>
+            <p class="subtitulo">
+              Atendimentos de datas anteriores que ainda não tiveram registro preenchido.
+            </p>
+          </div>
+
+          <span class="tag" id="tagAtendimentosAnteriores">0 pendentes</span>
+        </div>
+
+        <div class="lista" id="listaAtendimentosAnteriores"></div>
+      </section>
+
+      <section class="card" id="cardFormularioSessao" style="display: none;">
         <div class="barra-acoes" style="margin-bottom: 18px;">
           <div>
             <h2>Formulário da sessão</h2>
             <p class="subtitulo" id="textoModoFormulario">
-              Preencha manualmente ou selecione um atendimento de hoje acima.
+              Preencha o registro do atendimento selecionado.
             </p>
           </div>
 
-          <button type="button" class="btn btn-claro" id="btnLimparAgendamento" style="display: none;">
-            Limpar seleção
+          <button type="button" class="btn btn-claro" id="btnLimparAgendamento">
+            Fechar formulário
           </button>
         </div>
 
@@ -112,7 +131,6 @@
               <label for="status">Status</label>
               <select id="status">
                 <option value="Realizada">Realizada</option>
-                <option value="Agendada">Agendada</option>
                 <option value="Cancelada pelo paciente">Cancelada pelo paciente</option>
                 <option value="Cancelada pelo psicólogo">Cancelada pelo psicólogo</option>
                 <option value="Falta">Falta</option>
@@ -123,7 +141,7 @@
 
           <div class="form-grupo">
             <label for="anotacoes">Anotações da sessão</label>
-            <textarea 
+            <textarea
               id="anotacoes"
               placeholder="Escreva aqui o registro da sessão..."
             ></textarea>
@@ -131,15 +149,15 @@
 
           <div class="form-grupo">
             <label for="hashtags">Hashtags</label>
-            <input 
-              type="text" 
+            <input
+              type="text"
               id="hashtags"
               placeholder="Exemplo: #ansiedade #trabalho #autoestima"
             />
           </div>
 
           <button type="submit" class="btn btn-principal" id="btnSalvarSessao">
-            Salvar sessão
+            Salvar registro
           </button>
 
           <p id="mensagemSessao" class="mensagem-form" style="margin-top: 14px;"></p>

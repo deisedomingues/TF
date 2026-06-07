@@ -1,13 +1,13 @@
 let usuarioAgenda = null;
 let agendamentosCarregados = [];
 let filtroAtual = "todos";
+let agendaExpandida = false;
+let buscaPacienteAtual = "";
 
 document.addEventListener("DOMContentLoaded", async () => {
   usuarioAgenda = await exigirLogin();
 
-  if (!usuarioAgenda) {
-    return;
-  }
+  if (!usuarioAgenda) return;
 
   configurarBotaoSair();
 
@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   configurarFormularioAgenda();
+  configurarBuscaPaciente();
+  configurarBotaoExpandir();
 
   if (pacienteIdUrl) {
     abrirFormularioAgenda();
@@ -42,30 +44,46 @@ function configurarFormularioAgenda() {
   if (btnAlternarFormulario && areaFormulario) {
     btnAlternarFormulario.addEventListener("click", () => {
       const estaAberto = areaFormulario.style.display !== "none";
-
       areaFormulario.style.display = estaAberto ? "none" : "block";
       btnAlternarFormulario.textContent = estaAberto ? "Abrir formulário" : "Recolher formulário";
     });
   }
 
   recorrencia.addEventListener("change", () => {
-    if (recorrencia.value === "nao") {
-      boxRecorrencia.style.display = "none";
-    } else {
-      boxRecorrencia.style.display = "block";
-    }
+    boxRecorrencia.style.display = recorrencia.value === "nao" ? "none" : "block";
   });
 
   formAgenda.addEventListener("submit", salvarAgendamento);
+}
+
+function configurarBuscaPaciente() {
+  const campoBusca = document.getElementById("buscaPacienteAgenda");
+
+  if (!campoBusca) return;
+
+  campoBusca.addEventListener("input", () => {
+    buscaPacienteAtual = campoBusca.value.trim().toLowerCase();
+    agendaExpandida = false;
+    mostrarProximosAgendamentos();
+  });
+}
+
+function configurarBotaoExpandir() {
+  const btnExpandir = document.getElementById("btnExpandirAgendamentos");
+
+  if (!btnExpandir) return;
+
+  btnExpandir.addEventListener("click", () => {
+    agendaExpandida = !agendaExpandida;
+    mostrarProximosAgendamentos();
+  });
 }
 
 function abrirFormularioAgenda() {
   const btnAlternarFormulario = document.getElementById("btnAlternarFormularioAgenda");
   const areaFormulario = document.getElementById("areaFormularioAgenda");
 
-  if (!btnAlternarFormulario || !areaFormulario) {
-    return;
-  }
+  if (!btnAlternarFormulario || !areaFormulario) return;
 
   areaFormulario.style.display = "block";
   btnAlternarFormulario.textContent = "Recolher formulário";
@@ -75,9 +93,7 @@ function fecharFormularioAgendaAposSalvar() {
   const btnAlternarFormulario = document.getElementById("btnAlternarFormularioAgenda");
   const areaFormulario = document.getElementById("areaFormularioAgenda");
 
-  if (!btnAlternarFormulario || !areaFormulario) {
-    return;
-  }
+  if (!btnAlternarFormulario || !areaFormulario) return;
 
   areaFormulario.style.display = "none";
   btnAlternarFormulario.textContent = "Abrir formulário";
@@ -122,25 +138,20 @@ async function carregarPacientes() {
 async function carregarConfiguracoesPadrao() {
   const { data, error } = await supabaseClient
     .from("configuracoes_site")
-    .select("valor_padrao, duracao_padrao, modalidade_padrao")
+    .select("duracao_padrao, modalidade_padrao")
     .eq("usuario_id", usuarioAgenda.id)
     .maybeSingle();
 
-  if (error || !data) {
-    return;
-  }
+  if (error) console.error(error);
 
-  if (data.valor_padrao !== null && data.valor_padrao !== undefined) {
-    document.getElementById("valorSessao").value = data.valor_padrao;
-  }
-
-  if (data.modalidade_padrao) {
+  if (data && data.modalidade_padrao) {
     document.getElementById("modalidade").value = data.modalidade_padrao;
   }
 
-  const duracao = Number(data.duracao_padrao || 50);
+  const duracao = Number(data?.duracao_padrao || 50);
+  const horaInicio = document.getElementById("horaInicio");
 
-  document.getElementById("horaInicio").addEventListener("change", () => {
+  horaInicio.addEventListener("change", () => {
     preencherHoraFimPelaDuracao(duracao);
   });
 }
@@ -149,12 +160,11 @@ function preencherHoraFimPelaDuracao(duracao) {
   const horaInicio = document.getElementById("horaInicio").value;
   const horaFim = document.getElementById("horaFim");
 
-  if (!horaInicio || horaFim.value) {
-    return;
-  }
+  if (!horaInicio || horaFim.value) return;
 
   const [h, m] = horaInicio.split(":").map(Number);
   const data = new Date();
+
   data.setHours(h);
   data.setMinutes(m + duracao);
 
@@ -169,11 +179,9 @@ async function salvarAgendamento(event) {
 
   const pacienteId = document.getElementById("paciente").value;
   const dataPrimeiraSessao = document.getElementById("dataPrimeiraSessao").value;
-  const valorSessao = document.getElementById("valorSessao").value;
   const horaInicio = document.getElementById("horaInicio").value;
   const horaFim = document.getElementById("horaFim").value;
   const modalidade = document.getElementById("modalidade").value;
-  const status = document.getElementById("status").value;
   const recorrencia = document.getElementById("recorrencia").value;
   const repetirAte = document.getElementById("repetirAte").value;
   const quantidadeSessoes = document.getElementById("quantidadeSessoes").value;
@@ -183,6 +191,11 @@ async function salvarAgendamento(event) {
 
   if (!pacienteId || !dataPrimeiraSessao || !horaInicio || !horaFim) {
     mensagem.textContent = "Preencha paciente, data e horários do agendamento.";
+    return;
+  }
+
+  if (horaFim <= horaInicio) {
+    mensagem.textContent = "A hora de fim precisa ser depois da hora de início.";
     return;
   }
 
@@ -197,11 +210,9 @@ async function salvarAgendamento(event) {
   const agendamentos = gerarAgendamentos({
     pacienteId,
     dataPrimeiraSessao,
-    valorSessao,
     horaInicio,
     horaFim,
     modalidade,
-    status,
     recorrencia,
     repetirAte,
     quantidadeSessoes,
@@ -229,7 +240,6 @@ async function salvarAgendamento(event) {
   document.getElementById("dataPrimeiraSessao").value = formatarDataISO(new Date());
   document.getElementById("boxRecorrencia").style.display = "none";
 
-  await carregarConfiguracoesPadrao();
   await carregarAgendamentos();
 
   fecharFormularioAgendaAposSalvar();
@@ -260,8 +270,8 @@ function gerarAgendamentos(dados) {
       hora_inicio: dados.horaInicio,
       hora_fim: dados.horaFim,
       modalidade: dados.modalidade,
-      status: dados.status,
-      valor_sessao: dados.valorSessao ? Number(dados.valorSessao) : null,
+      status: "Agendada",
+      valor_sessao: null,
       observacoes: dados.observacoes || null,
       recorrencia: dados.recorrencia,
       recorrencia_grupo: grupoRecorrencia,
@@ -275,13 +285,8 @@ function gerarAgendamentos(dados) {
 }
 
 function calcularQuantidadeAgendamentos(dataInicial, recorrencia, repetirAte, quantidadeSessoes) {
-  if (recorrencia === "nao") {
-    return 1;
-  }
-
-  if (quantidadeSessoes) {
-    return Number(quantidadeSessoes);
-  }
+  if (recorrencia === "nao") return 1;
+  if (quantidadeSessoes) return Number(quantidadeSessoes);
 
   const fim = criarDataLocal(repetirAte);
   let atual = criarDataLocal(dataInicial);
@@ -312,7 +317,7 @@ function proximaData(data, recorrencia) {
 async function carregarAgendamentos() {
   const hoje = formatarDataISO(new Date());
 
-  const { data, error } = await supabaseClient
+  const { data: agendamentos, error } = await supabaseClient
     .from("agendamentos")
     .select("*, pacientes(nome)")
     .eq("usuario_id", usuarioAgenda.id)
@@ -325,11 +330,40 @@ async function carregarAgendamentos() {
     return;
   }
 
-  agendamentosCarregados = data || [];
+  const listaAgendamentos = agendamentos || [];
+  const idsAgendamentos = listaAgendamentos.map((item) => item.id);
+
+  let sessoesPorAgendamento = {};
+
+  if (idsAgendamentos.length > 0) {
+    const { data: sessoes, error: erroSessoes } = await supabaseClient
+      .from("sessoes")
+      .select("id, agendamento_id, status, modalidade")
+      .eq("usuario_id", usuarioAgenda.id)
+      .in("agendamento_id", idsAgendamentos);
+
+    if (erroSessoes) {
+      console.error("Erro ao buscar sessões vinculadas:", erroSessoes);
+    }
+
+    (sessoes || []).forEach((sessao) => {
+      sessoesPorAgendamento[Number(sessao.agendamento_id)] = sessao;
+    });
+  }
+
+  agendamentosCarregados = listaAgendamentos.map((agendamento) => {
+    const sessaoVinculada = sessoesPorAgendamento[Number(agendamento.id)] || null;
+
+    return {
+      ...agendamento,
+      sessao_registrada_id: sessaoVinculada?.id || null,
+      sessao_status: sessaoVinculada?.status || null,
+      sessao_modalidade: sessaoVinculada?.modalidade || null
+    };
+  });
 
   mostrarAgendaHoje();
   mostrarProximosAgendamentos();
-  atualizarIndicadores();
 }
 
 function mostrarAgendaHoje() {
@@ -369,8 +403,13 @@ function criarCardAgendaHoje(item) {
         <p>${escaparHTML(item.modalidade || "--")}</p>
 
         <div class="tags">
-          <span class="tag">${escaparHTML(item.status || "--")}</span>
-          ${item.recorrencia !== "nao" ? `<span class="tag">Recorrente</span>` : ""}
+          ${criarTagStatusAtendimento(item)}
+          ${criarTagSituacaoRegistro(item)}
+        </div>
+
+        <div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+          ${criarBotaoEditarAgendamento(item)}
+          ${criarBotaoRegistroSessao(item)}
         </div>
       </div>
     </article>
@@ -379,92 +418,205 @@ function criarCardAgendaHoje(item) {
 
 function mostrarProximosAgendamentos() {
   const lista = document.getElementById("listaProximosAgendamentos");
-  const agendamentos = filtrarAgendamentosPorPeriodo();
+  const btnExpandir = document.getElementById("btnExpandirAgendamentos");
 
-  if (agendamentos.length === 0) {
+  const agendamentosFiltrados = filtrarAgendamentosPorPeriodo();
+  const agendamentosParaExibir = agendaExpandida
+    ? agendamentosFiltrados
+    : agendamentosFiltrados.slice(0, 5);
+
+  if (agendamentosFiltrados.length === 0) {
     lista.innerHTML = `
       <article class="item-lista">
         <div>
           <h3>Nenhum agendamento encontrado</h3>
-          <p>Cadastre um novo agendamento ou altere o filtro.</p>
+          <p>Cadastre um novo agendamento, altere o filtro ou revise a busca pelo nome do paciente.</p>
         </div>
       </article>
     `;
+
+    if (btnExpandir) {
+      btnExpandir.style.display = "none";
+    }
+
     return;
   }
 
-  lista.innerHTML = agendamentos.map(criarCardProximoAgendamento).join("");
+  lista.innerHTML = agendamentosParaExibir.map(criarCardProximoAgendamento).join("");
+
+  if (btnExpandir) {
+    if (agendamentosFiltrados.length > 5) {
+      btnExpandir.style.display = "inline-block";
+      btnExpandir.textContent = agendaExpandida ? "Recolher" : `Expandir (${agendamentosFiltrados.length})`;
+    } else {
+      btnExpandir.style.display = "none";
+    }
+  }
 }
 
 function criarCardProximoAgendamento(item) {
   return `
     <article class="item-lista">
-      <div>
+      <div style="width: 100%;">
         <h3>${escaparHTML(item.pacientes?.nome || "Paciente")}</h3>
-        <p><strong>${escaparHTML(formatarData(item.data_sessao))}</strong> — ${escaparHTML(item.hora_inicio?.slice(0, 5) || "--")} às ${escaparHTML(item.hora_fim?.slice(0, 5) || "--")}</p>
-        <p>${escaparHTML(item.modalidade || "--")} ${item.recorrencia !== "nao" ? "— sessão recorrente" : "— sessão avulsa"}</p>
+
+        <p>
+          <strong>${escaparHTML(formatarData(item.data_sessao))}</strong> —
+          ${escaparHTML(item.hora_inicio?.slice(0, 5) || "--")} às
+          ${escaparHTML(item.hora_fim?.slice(0, 5) || "--")}
+        </p>
+
+        <p>${escaparHTML(item.modalidade || "--")}</p>
 
         <div class="tags">
-          <span class="tag">${escaparHTML(item.status || "--")}</span>
-          ${item.valor_sessao ? `<span class="tag">${formatarMoeda(item.valor_sessao)}</span>` : ""}
+          ${criarTagStatusAtendimento(item)}
+          ${criarTagSituacaoRegistro(item)}
           ${item.observacoes ? `<span class="tag">Com observações</span>` : ""}
         </div>
 
         ${item.observacoes ? `<p class="subtitulo" style="margin-top: 8px;">${escaparHTML(item.observacoes)}</p>` : ""}
+
+        <div style="margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap;">
+          ${criarBotaoEditarAgendamento(item)}
+          ${criarBotaoRegistroSessao(item)}
+        </div>
       </div>
     </article>
   `;
 }
 
+function criarTagStatusAtendimento(item) {
+  const statusReal = item.sessao_status || item.status || "Agendada";
+  const statusNormalizado = normalizarTexto(statusReal);
+  const modalidadeReal = item.sessao_modalidade || item.modalidade;
+
+  if (statusNormalizado === "realizada") {
+    return `<span class="tag">Realizada - ${escaparHTML(formatarModalidadeCurta(modalidadeReal))}</span>`;
+  }
+
+  return `<span class="tag">${escaparHTML(statusReal)}</span>`;
+}
+
+function criarTagSituacaoRegistro(item) {
+  if (!item.sessao_registrada_id) return "";
+
+  return `
+    <span class="tag" style="background: #E9F9EF; color: #246B3A; border: 1px solid #BDECCB;">
+      Registro preenchido
+    </span>
+  `;
+}
+
+function criarBotaoEditarAgendamento(item) {
+  return `
+    <a
+      href="editar-agendamento.html?id=${item.id}"
+      class="btn btn-claro"
+      style="display: inline-flex; padding: 8px 14px; font-size: 0.9rem;"
+    >
+      Editar
+    </a>
+  `;
+}
+
+function criarBotaoRegistroSessao(item) {
+  if (item.sessao_registrada_id) return "";
+
+  const hoje = formatarDataISO(new Date());
+  const podeRegistrar = item.data_sessao <= hoje;
+
+  if (!podeRegistrar) {
+    return `
+      <button
+        type="button"
+        class="btn btn-claro"
+        disabled
+        title="O registro só poderá ser preenchido na data agendada."
+        style="display: inline-flex; padding: 8px 14px; font-size: 0.9rem; opacity: 0.6; cursor: not-allowed;"
+      >
+        Preencher registro
+      </button>
+    `;
+  }
+
+  return `
+    <a
+      href="registrar-sessao.html?agendamento_id=${item.id}"
+      class="btn btn-principal"
+      style="display: inline-flex; padding: 8px 14px; font-size: 0.9rem;"
+    >
+      Preencher registro
+    </a>
+  `;
+}
+
 function filtrarAgendamentosPorPeriodo() {
   const hoje = criarDataLocal(formatarDataISO(new Date()));
-  const fim = new Date(hoje);
+  const amanha = new Date(hoje);
+  amanha.setDate(hoje.getDate() + 1);
 
-  if (filtroAtual === "hoje") {
-    const hojeISO = formatarDataISO(hoje);
-    return agendamentosCarregados.filter((item) => item.data_sessao === hojeISO);
-  }
+  const fim = new Date(amanha);
+
+  let lista = agendamentosCarregados.filter((item) => {
+    const dataItem = criarDataLocal(item.data_sessao);
+    return dataItem >= amanha;
+  });
 
   if (filtroAtual === "semana") {
-    fim.setDate(hoje.getDate() + 7);
+    fim.setDate(amanha.getDate() + 7);
+
+    lista = lista.filter((item) => {
+      const dataItem = criarDataLocal(item.data_sessao);
+      return dataItem >= amanha && dataItem <= fim;
+    });
   } else if (filtroAtual === "mes") {
-    fim.setMonth(hoje.getMonth() + 1);
-  } else {
-    return agendamentosCarregados;
+    fim.setMonth(amanha.getMonth() + 1);
+
+    lista = lista.filter((item) => {
+      const dataItem = criarDataLocal(item.data_sessao);
+      return dataItem >= amanha && dataItem <= fim;
+    });
+  } else if (filtroAtual === "ano") {
+    fim.setFullYear(amanha.getFullYear() + 1);
+
+    lista = lista.filter((item) => {
+      const dataItem = criarDataLocal(item.data_sessao);
+      return dataItem >= amanha && dataItem <= fim;
+    });
   }
 
-  return agendamentosCarregados.filter((item) => {
-    const dataItem = criarDataLocal(item.data_sessao);
-    return dataItem >= hoje && dataItem <= fim;
-  });
+  if (buscaPacienteAtual) {
+    lista = lista.filter((item) => {
+      const nomePaciente = String(item.pacientes?.nome || "").toLowerCase();
+      return nomePaciente.includes(buscaPacienteAtual);
+    });
+  }
+
+  return lista;
 }
 
 function alterarFiltroAgenda(filtro) {
   filtroAtual = filtro;
+  agendaExpandida = false;
   mostrarProximosAgendamentos();
 }
 
-function atualizarIndicadores() {
-  const hoje = criarDataLocal(formatarDataISO(new Date()));
-  const hojeISO = formatarDataISO(hoje);
+function formatarModalidadeCurta(modalidade) {
+  const texto = String(modalidade || "").trim().toLowerCase();
 
-  const fimSemana = new Date(hoje);
-  fimSemana.setDate(hoje.getDate() + 7);
+  if (texto === "online" || texto === "on-line") return "online";
+  if (texto === "presencial") return "presencial";
+  if (texto === "híbrida" || texto === "hibrida") return "híbrida";
 
-  const totalHoje = agendamentosCarregados.filter((item) => item.data_sessao === hojeISO).length;
+  return texto || "modalidade não informada";
+}
 
-  const totalSemana = agendamentosCarregados.filter((item) => {
-    const dataItem = criarDataLocal(item.data_sessao);
-    return dataItem >= hoje && dataItem <= fimSemana;
-  }).length;
-
-  const totalRecorrentes = agendamentosCarregados.filter((item) => item.recorrencia !== "nao").length;
-  const totalRemarcacoes = agendamentosCarregados.filter((item) => item.status === "Remarcada").length;
-
-  document.getElementById("totalHoje").textContent = totalHoje;
-  document.getElementById("totalSemana").textContent = totalSemana;
-  document.getElementById("totalRecorrentes").textContent = totalRecorrentes;
-  document.getElementById("totalRemarcacoes").textContent = totalRemarcacoes;
+function normalizarTexto(texto) {
+  return String(texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
 }
 
 function criarDataLocal(dataISO) {
@@ -481,9 +633,7 @@ function formatarDataISO(data) {
 }
 
 function formatarData(dataISO) {
-  if (!dataISO) {
-    return "--";
-  }
+  if (!dataISO) return "--";
 
   const [ano, mes, dia] = dataISO.split("-");
   return `${dia}/${mes}/${ano}`;
@@ -495,13 +645,6 @@ function formatarDataCompleta(data) {
     day: "2-digit",
     month: "2-digit",
     year: "numeric"
-  });
-}
-
-function formatarMoeda(valor) {
-  return Number(valor || 0).toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
   });
 }
 

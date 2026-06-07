@@ -10,25 +10,7 @@
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="container topbar-conteudo">
-      <div class="marca">
-        <div class="marca-icone">T</div>
-        <span>Tatiely Psicologia</span>
-      </div>
-
-      <nav class="menu">
-        <a href="home.html">Início</a>
-        <a href="pacientes.html">Pacientes</a>
-        <a href="registrar-sessao.html" class="ativo">Sessões</a>
-        <a href="agenda.html">Agenda</a>
-        <a href="buscar-hashtags.html">Hashtags</a>
-        <a href="financeiro.html">Financeiro</a>
-        <a href="login.html">Sair</a>
-      </nav>
-    </div>
-  </header>
-
+  
   <main class="conteudo">
     <div class="container">
 
@@ -156,6 +138,77 @@
             />
           </div>
 
+          <hr style="border: none; border-top: 1px solid var(--borda); margin: 24px 0;" />
+
+          <h2>Financeiro</h2>
+          <p class="subtitulo" style="margin-bottom: 18px;">
+            Informe como esta sessão será cobrada ou vincule a um pacote ativo.
+          </p>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="tipoCobranca">Tipo de cobrança</label>
+              <select id="tipoCobranca">
+                <option value="avulsa">Sessão avulsa</option>
+                <option value="pacote">Vincular a pacote</option>
+                <option value="pos_pago">Mensal / pós-pago</option>
+                <option value="sem_cobranca">Sem cobrança</option>
+              </select>
+            </div>
+
+            <div class="form-grupo" id="grupoPacote" style="display: none;">
+              <label for="pacoteId">Pacote do paciente</label>
+              <select id="pacoteId">
+                <option value="">Selecione um pacote</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="form-grupo">
+              <label for="valorSessao">Valor da sessão</label>
+              <input type="number" id="valorSessao" min="0" step="0.01" placeholder="Ex: 250.00" />
+            </div>
+
+            <div class="form-grupo">
+              <label for="pago">Pagamento</label>
+              <select id="pago">
+                <option value="nao">Não pago</option>
+                <option value="sim">Pago</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="boxPagamento" style="display: none;">
+            <div class="linha-form">
+              <div class="form-grupo">
+                <label for="formaPagamento">Forma de pagamento</label>
+                <select id="formaPagamento">
+                  <option value="">Selecione</option>
+                  <option value="Pix">Pix</option>
+                  <option value="Dinheiro">Dinheiro</option>
+                  <option value="Cartão de crédito">Cartão de crédito</option>
+                  <option value="Cartão de débito">Cartão de débito</option>
+                  <option value="Transferência">Transferência</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </div>
+
+              <div class="form-grupo">
+                <label for="dataPagamento">Data do pagamento</label>
+                <input type="date" id="dataPagamento" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="observacaoFinanceira">Observação financeira</label>
+            <textarea
+              id="observacaoFinanceira"
+              placeholder="Ex: paciente pagará no fim do mês, desconto, combinado financeiro etc."
+            ></textarea>
+          </div>
+
           <button type="submit" class="btn btn-principal" id="btnSalvarSessao">
             Salvar registro
           </button>
@@ -171,6 +224,13 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/supabase.js"></script>
+  <script src="js/tema-global.js"></script>
   <script src="js/registrar-sessao.js"></script>
 </body>
+<main class="conteudo">
+  <div class="container">
+
+    <div class="topo-interno-simples">
+      <a href="home.html" class="btn btn-claro">← Voltar</a>
+    </div>
 </html>

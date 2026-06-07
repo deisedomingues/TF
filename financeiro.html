@@ -3,136 +3,128 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Financeiro | Agenda Clínica</title>
+
+  <title>Financeiro | Tatiely Psicologia</title>
+
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <header class="topbar">
-    <div class="container topbar-conteudo">
-      <div class="marca">
-        <div class="marca-icone">D</div>
-        <span>Agenda Clínica</span>
-      </div>
-
-      <nav class="menu">
-        <a href="home.html">Início</a>
-        <a href="pacientes.html">Pacientes</a>
-        <a href="registrar-sessao.html">Sessões</a>
-        <a href="financeiro.html" class="ativo">Financeiro</a>
-        <a href="login.html">Sair</a>
-      </nav>
-    </div>
-  </header>
+  
 
   <main class="conteudo">
     <div class="container">
 
+      <a href="home.html" class="subtitulo" style="display: inline-block; margin-bottom: 16px; text-decoration: none;">
+        ← Voltar
+      </a>
+
       <section class="cabecalho-pagina">
         <h1>Financeiro</h1>
         <p class="subtitulo">
-          Controle sessões pagas, pendentes e valores previstos.
+          Controle valores recebidos, pendentes e sessões registradas.
         </p>
       </section>
 
       <section class="grid-cards">
         <div class="card-indicador">
           <span>Recebido no mês</span>
-          <strong>R$ 3.200</strong>
+          <strong id="totalRecebidoMes">R$ 0,00</strong>
         </div>
 
         <div class="card-indicador">
           <span>Pendente</span>
-          <strong>R$ 850</strong>
+          <strong id="totalPendente">R$ 0,00</strong>
         </div>
 
         <div class="card-indicador">
           <span>Sessões pagas</span>
-          <strong>32</strong>
+          <strong id="totalSessoesPagas">0</strong>
         </div>
 
         <div class="card-indicador">
           <span>Sessões pendentes</span>
-          <strong>7</strong>
+          <strong id="totalSessoesPendentes">0</strong>
         </div>
       </section>
 
       <section class="card" style="margin-bottom: 24px;">
-        <h2>Novo lançamento</h2>
-
-        <form>
-          <div class="linha-form">
-            <div class="form-grupo">
-              <label for="paciente">Paciente</label>
-              <select id="paciente">
-                <option>Maria Oliveira</option>
-                <option>João Santos</option>
-              </select>
-            </div>
-
-            <div class="form-grupo">
-              <label for="valor">Valor</label>
-              <input type="number" id="valor" placeholder="Exemplo: 150.00" />
-            </div>
+        <div class="barra-acoes">
+          <div>
+            <h2>Filtros</h2>
+            <p class="subtitulo">
+              Consulte os registros financeiros por período, paciente ou situação de pagamento.
+            </p>
           </div>
 
-          <div class="linha-form">
-            <div class="form-grupo">
-              <label for="vencimento">Data de vencimento</label>
-              <input type="date" id="vencimento" />
-            </div>
+          <a href="pacotes.html" class="btn btn-secundario">
+            Ver pacotes
+          </a>
+        </div>
 
-            <div class="form-grupo">
-              <label for="status">Status</label>
-              <select id="status">
-                <option>Pendente</option>
-                <option>Pago</option>
-                <option>Atrasado</option>
-                <option>Cancelado</option>
-              </select>
-            </div>
+        <div class="linha-form">
+          <div class="form-grupo">
+            <label for="dataInicio">Data inicial</label>
+            <input type="date" id="dataInicio" />
           </div>
 
-          <button type="button" class="btn btn-principal">
-            Salvar lançamento
-          </button>
-        </form>
+          <div class="form-grupo">
+            <label for="dataFim">Data final</label>
+            <input type="date" id="dataFim" />
+          </div>
+        </div>
+
+        <div class="linha-form">
+          <div class="form-grupo">
+            <label for="filtroStatusPagamento">Pagamento</label>
+            <select id="filtroStatusPagamento">
+              <option value="todos">Todos</option>
+              <option value="pagos">Pagos</option>
+              <option value="pendentes">Pendentes</option>
+            </select>
+          </div>
+
+          <div class="form-grupo">
+            <label for="buscaPacienteFinanceiro">Buscar paciente</label>
+            <input
+              type="text"
+              id="buscaPacienteFinanceiro"
+              placeholder="Digite o nome do paciente"
+            />
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-principal" id="btnAplicarFiltros">
+          Aplicar filtros
+        </button>
       </section>
 
       <section>
-        <h2>Pagamentos recentes</h2>
-
-        <div class="lista" style="margin-top: 12px;">
-
-          <article class="item-lista">
-            <div>
-              <h3>Maria Oliveira</h3>
-              <p>Sessão de 22/04/2026 — R$ 150,00</p>
-              <div class="tags">
-                <span class="tag">Pago</span>
-              </div>
-            </div>
-
-            <a href="#" class="btn btn-claro">Detalhes</a>
-          </article>
-
-          <article class="item-lista">
-            <div>
-              <h3>João Santos</h3>
-              <p>Sessão de 20/04/2026 — R$ 150,00</p>
-              <div class="tags">
-                <span class="tag">Pendente</span>
-              </div>
-            </div>
-
-            <a href="#" class="btn btn-claro">Detalhes</a>
-          </article>
-
+        <div class="barra-acoes">
+          <div>
+            <h2>Registros financeiros</h2>
+            <p class="subtitulo">
+              Lista baseada nas sessões registradas.
+            </p>
+          </div>
         </div>
+
+        <div class="lista" id="listaFinanceiro"></div>
       </section>
 
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/tema-global.js"></script>
+  <script src="js/financeiro.js"></script>
 </body>
+<main class="conteudo">
+  <div class="container">
+
+    <div class="topo-interno-simples">
+      <a href="home.html" class="btn btn-claro">← Voltar</a>
+    </div>
 </html>

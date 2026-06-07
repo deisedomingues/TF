@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   configurarFormularioAgenda();
   configurarBuscaPaciente();
   configurarBotaoExpandir();
+  impedirSubmitComEnter("formAgenda");
 
   if (pacienteIdUrl) {
     abrirFormularioAgenda();
@@ -33,6 +34,23 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   await carregarAgendamentos();
 });
+
+function impedirSubmitComEnter(formId) {
+  const form = document.getElementById(formId);
+
+  if (!form) return;
+
+  form.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter") return;
+
+    const elemento = event.target;
+    const tag = elemento.tagName.toLowerCase();
+
+    if (tag === "textarea") return;
+
+    event.preventDefault();
+  });
+}
 
 function configurarFormularioAgenda() {
   const formAgenda = document.getElementById("formAgenda");

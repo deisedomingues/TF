@@ -4,42 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Configurações | Amanda Souza Fisioterapeuta</title>
+  <title>Configurações | Tatiely Psicologia</title>
 
   <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
-  <header class="topbar">
-    <div class="container topbar-conteudo">
-
-      <div class="marca">
-        <div class="marca-icone">A</div>
-        <div>
-          <span>Amanda Souza</span>
-          <small>Fisioterapeuta</small>
-        </div>
-      </div>
-
-      <nav class="menu">
-        <a href="home.html">Início</a>
-        <a href="pacientes.html">Pacientes</a>
-        <a href="registrar-sessao.html">Sessões</a>
-        <a href="agenda.html">Agenda</a>
-        <a href="buscar-hashtags.html">Hashtags</a>
-        <a href="financeiro.html">Financeiro</a>
-        <a href="configuracoes.html" class="ativo">Configurações</a>
-        <a href="login.html">Sair</a>
-      </nav>
-
-    </div>
-  </header>
-
   <main class="conteudo">
     <div class="container">
 
-      <div style="margin-bottom: 16px;">
+      <div class="topo-interno-simples">
         <a href="home.html" class="btn btn-claro">
           ← Voltar para início
         </a>
@@ -51,13 +26,11 @@
         <h1>Configurações</h1>
 
         <p class="subtitulo">
-          Ajuste os dados da profissional, preferências de atendimento, valores padrão e identidade visual do sistema.
+          Ajuste os dados profissionais, preferências de atendimento, valores padrão e identidade visual do sistema interno.
         </p>
       </section>
 
-      <div id="mensagemConfig" class="mensagem-sucesso" style="display: none;">
-        Configurações salvas com sucesso!
-      </div>
+      <div id="mensagemConfig" class="mensagem-sucesso" style="display: none;"></div>
 
       <form id="formConfiguracoes">
 
@@ -78,7 +51,7 @@
                   <input 
                     type="text" 
                     id="nomeProfissional" 
-                    value="Amanda Souza"
+                    placeholder="Ex: Tatiely Psicologia"
                     required
                   />
                 </div>
@@ -88,7 +61,7 @@
                   <input 
                     type="text" 
                     id="registroProfissional" 
-                    placeholder="Ex: CREFITO 000000-F"
+                    placeholder="Ex: CRP 00/00000"
                   />
                 </div>
               </div>
@@ -99,7 +72,7 @@
                   <input 
                     type="email" 
                     id="emailProfissional" 
-                    placeholder="email@clinica.com"
+                    placeholder="email@tatielypsi.com"
                   />
                 </div>
 
@@ -126,7 +99,7 @@
                 <label for="bioProfissional">Descrição profissional</label>
                 <textarea 
                   id="bioProfissional"
-                  placeholder="Ex: Fisioterapeuta especializada em reabilitação, dor, postura e mobilidade..."
+                  placeholder="Ex: Psicóloga com atuação em psicologia perinatal, maternidade, parentalidade e acolhimento emocional..."
                 ></textarea>
               </div>
             </section>
@@ -144,7 +117,7 @@
                   <input 
                     type="number" 
                     id="valorPadrao" 
-                    placeholder="Ex: 150.00"
+                    placeholder="Ex: 180.00"
                     min="0"
                     step="0.01"
                   />
@@ -155,8 +128,8 @@
                   <select id="duracaoPadrao">
                     <option value="30">30 minutos</option>
                     <option value="45">45 minutos</option>
-                    <option value="50">50 minutos</option>
-                    <option value="60" selected>60 minutos</option>
+                    <option value="50" selected>50 minutos</option>
+                    <option value="60">60 minutos</option>
                     <option value="90">90 minutos</option>
                   </select>
                 </div>
@@ -166,9 +139,8 @@
                 <div class="form-grupo">
                   <label for="modalidadePadrao">Modalidade padrão</label>
                   <select id="modalidadePadrao">
-                    <option selected>Presencial</option>
                     <option>Online</option>
-                    <option>Domiciliar</option>
+                    <option>Presencial</option>
                     <option>Híbrida</option>
                   </select>
                 </div>
@@ -200,7 +172,7 @@
                 <div class="form-grupo">
                   <label for="formaPagamentoPadrao">Forma de pagamento mais usada</label>
                   <select id="formaPagamentoPadrao">
-                    <option selected>Pix</option>
+                    <option>Pix</option>
                     <option>Dinheiro</option>
                     <option>Cartão de crédito</option>
                     <option>Cartão de débito</option>
@@ -211,10 +183,10 @@
             </section>
 
             <section class="card">
-              <h2>Identidade visual</h2>
+              <h2>Identidade visual do sistema</h2>
 
               <p class="subtitulo" style="margin-bottom: 18px;">
-                O sistema está usando o tema personalizado da Amanda Souza, baseado nas cores da logo.
+                Escolha o tema de cores usado nas telas internas do sistema.
               </p>
 
               <div class="form-grupo">
@@ -222,23 +194,64 @@
                 <input 
                   type="text" 
                   id="nomeSistema" 
-                  value="Agenda Amanda Souza"
+                  placeholder="Ex: Tatiely Psicologia"
                 />
               </div>
 
+              <div class="grade-temas">
+
+                <button type="button" class="opcao-tema" data-tema="perinatal">
+                  <span class="tema-bolinhas">
+                    <i style="background:#FFFFFF;"></i>
+                    <i style="background:#8FAF9B;"></i>
+                    <i style="background:#F2E8DC;"></i>
+                    <i style="background:#365A45;"></i>
+                  </span>
+                  <strong>Perinatal</strong>
+                  <small>Verde suave, bege e branco.</small>
+                </button>
+
+                <button type="button" class="opcao-tema" data-tema="acolhimento">
+                  <span class="tema-bolinhas">
+                    <i style="background:#FFFFFF;"></i>
+                    <i style="background:#BFA6D9;"></i>
+                    <i style="background:#F5EDE4;"></i>
+                    <i style="background:#5D4B6B;"></i>
+                  </span>
+                  <strong>Acolhimento</strong>
+                  <small>Lavanda, areia e branco.</small>
+                </button>
+
+                <button type="button" class="opcao-tema" data-tema="profissional">
+                  <span class="tema-bolinhas">
+                    <i style="background:#FFFFFF;"></i>
+                    <i style="background:#245143;"></i>
+                    <i style="background:#E7ECE9;"></i>
+                    <i style="background:#1E2D2A;"></i>
+                  </span>
+                  <strong>Profissional</strong>
+                  <small>Verde escuro, cinza e branco.</small>
+                </button>
+
+                <button type="button" class="opcao-tema" data-tema="maternidade">
+                  <span class="tema-bolinhas">
+                    <i style="background:#FFFFFF;"></i>
+                    <i style="background:#D9A7A7;"></i>
+                    <i style="background:#F7EDE8;"></i>
+                    <i style="background:#7A4E4E;"></i>
+                  </span>
+                  <strong>Maternidade</strong>
+                  <small>Rosé, creme e verde claro.</small>
+                </button>
+
+              </div>
+
               <div class="preview-tema-atual" style="margin-top: 18px;">
-                <h3 id="previewTemaNome">Tema Amanda Souza</h3>
+                <h3 id="previewTemaNome">Tema Perinatal</h3>
 
                 <p id="previewTemaDescricao">
-                  Tema com roxo principal, azul turquesa, fundo claro e cartões brancos.
+                  Tema delicado com verde suave, bege e branco.
                 </p>
-
-                <div class="amostras-tema" style="margin-top: 14px;">
-                  <span class="bolinha-cor" style="background:#FFFFFF;"></span>
-                  <span class="bolinha-cor" style="background:#463581;"></span>
-                  <span class="bolinha-cor" style="background:#45B8CF;"></span>
-                  <span class="bolinha-cor" style="background:#EAF8FB;"></span>
-                </div>
 
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px;">
                   <button type="button" class="btn btn-principal">Botão principal</button>
@@ -268,7 +281,7 @@
               <div class="mini-lista">
                 <div class="mini-item">
                   <span>Profissional</span>
-                  <strong id="previewNome">Amanda Souza</strong>
+                  <strong id="previewNome">Não definido</strong>
                 </div>
 
                 <div class="mini-item">
@@ -278,17 +291,17 @@
 
                 <div class="mini-item">
                   <span>Duração</span>
-                  <strong id="previewDuracao">60 minutos</strong>
+                  <strong id="previewDuracao">50 minutos</strong>
                 </div>
 
                 <div class="mini-item">
                   <span>Modalidade</span>
-                  <strong id="previewModalidade">Presencial</strong>
+                  <strong id="previewModalidade">Online</strong>
                 </div>
 
                 <div class="mini-item">
                   <span>Tema atual</span>
-                  <strong id="previewTemaResumo">Amanda Souza</strong>
+                  <strong id="previewTemaResumo">Perinatal</strong>
                 </div>
               </div>
             </section>
@@ -297,7 +310,7 @@
               <h2>Segurança</h2>
 
               <p class="subtitulo" style="margin-top: 8px;">
-                Como este sistema terá dados sensíveis de pacientes, depois vamos usar login real, regras de acesso e proteção no Supabase.
+                Como este sistema terá dados sensíveis de pacientes, é importante manter login obrigatório, RLS e acesso por usuário.
               </p>
 
               <div class="tags" style="margin-top: 14px;">
@@ -308,27 +321,27 @@
             </section>
 
             <section class="card">
-              <h2>Próximos ajustes</h2>
+              <h2>O que esta tela altera?</h2>
 
               <div class="mini-lista">
                 <div class="mini-item">
-                  <span>1</span>
-                  <strong>Conectar Supabase Auth</strong>
+                  <span>Site público</span>
+                  <strong>Não altera</strong>
                 </div>
 
                 <div class="mini-item">
-                  <span>2</span>
-                  <strong>Salvar perfil da fisioterapeuta</strong>
+                  <span>Sistema interno</span>
+                  <strong>Altera</strong>
                 </div>
 
                 <div class="mini-item">
-                  <span>3</span>
-                  <strong>Usar valor padrão na agenda</strong>
+                  <span>Agenda</span>
+                  <strong>Usa padrões</strong>
                 </div>
 
                 <div class="mini-item">
-                  <span>4</span>
-                  <strong>Gerar financeiro automaticamente</strong>
+                  <span>Financeiro</span>
+                  <strong>Usa valor padrão</strong>
                 </div>
               </div>
             </section>
@@ -342,6 +355,17 @@
     </div>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/temas.js"></script>
+  <script src="js/tema-global.js"></script>
   <script src="js/configuracoes.js"></script>
 </body>
+<main class="conteudo">
+  <div class="container">
+
+    <div class="topo-interno-simples">
+      <a href="home.html" class="btn btn-claro">← Voltar</a>
+    </div>
 </html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Resumo Geral | Tatiely Psicologia</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  
+
+  <main class="conteudo">
+    <div class="container">
+
+      <a href="home.html" class="subtitulo" style="display: inline-block; margin-bottom: 16px; text-decoration: none;">
+        ← Voltar
+      </a>
+
+      <section class="cabecalho-pagina">
+        <h1>Resumo geral</h1>
+        <p class="subtitulo">
+          Acompanhe indicadores gerais de pacientes, sessões, agenda, financeiro e pacotes.
+        </p>
+      </section>
+
+      <section class="card" style="margin-bottom: 24px;">
+        <div class="barra-acoes">
+          <div>
+            <h2>Filtros</h2>
+            <p class="subtitulo">Escolha o período para calcular os indicadores.</p>
+          </div>
+
+          <button type="button" class="btn btn-principal" id="btnAplicarFiltros">
+            Aplicar filtros
+          </button>
+        </div>
+
+        <div class="linha-form">
+          <div class="form-grupo">
+            <label for="dataInicio">Data inicial</label>
+            <input type="date" id="dataInicio" />
+          </div>
+
+          <div class="form-grupo">
+            <label for="dataFim">Data final</label>
+            <input type="date" id="dataFim" />
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador"><span>Pacientes totais</span><strong id="totalPacientes">0</strong></div>
+        <div class="card-indicador"><span>Pacientes ativos</span><strong id="totalPacientesAtivos">0</strong></div>
+        <div class="card-indicador"><span>Novos no período</span><strong id="totalNovosPacientes">0</strong></div>
+        <div class="card-indicador"><span>Pacientes inativos</span><strong id="totalPacientesInativos">0</strong></div>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador"><span>Sessões no período</span><strong id="totalSessoes">0</strong></div>
+        <div class="card-indicador"><span>Realizadas</span><strong id="totalRealizadas">0</strong></div>
+        <div class="card-indicador"><span>Faltas</span><strong id="totalFaltas">0</strong></div>
+        <div class="card-indicador"><span>Canceladas/remarcadas</span><strong id="totalCanceladasRemarcadas">0</strong></div>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador"><span>Recebido no período</span><strong id="totalRecebido">R$ 0,00</strong></div>
+        <div class="card-indicador"><span>Pendente</span><strong id="totalPendente">R$ 0,00</strong></div>
+        <div class="card-indicador"><span>Sessões pagas</span><strong id="totalPagas">0</strong></div>
+        <div class="card-indicador"><span>Ticket médio</span><strong id="ticketMedio">R$ 0,00</strong></div>
+      </section>
+
+      <section class="grid-cards">
+        <div class="card-indicador"><span>Agenda hoje</span><strong id="totalAgendaHoje">0</strong></div>
+        <div class="card-indicador"><span>Pendentes de registro</span><strong id="totalPendentesRegistro">0</strong></div>
+        <div class="card-indicador"><span>Pacotes ativos</span><strong id="totalPacotesAtivos">0</strong></div>
+        <div class="card-indicador"><span>Pacotes para renovar</span><strong id="totalPacotesRenovar">0</strong></div>
+      </section>
+
+      <section class="layout-agenda" style="margin-top: 24px;">
+        <div class="card">
+          <div class="barra-acoes">
+            <div>
+              <h2>Buscar paciente</h2>
+              <p class="subtitulo">Localize rapidamente um paciente e acesse os detalhes.</p>
+            </div>
+          </div>
+
+          <div class="form-grupo">
+            <label for="buscaPaciente">Nome do paciente</label>
+            <input type="text" id="buscaPaciente" placeholder="Digite o nome do paciente" />
+          </div>
+
+          <div class="lista" id="listaBuscaPacientes"></div>
+        </div>
+
+        <div class="card">
+          <h2>Resumo por modalidade</h2>
+          <p class="subtitulo">Sessões registradas no período.</p>
+
+          <div class="mini-lista">
+            <div class="mini-item"><span>Online</span><strong id="totalOnline">0</strong></div>
+            <div class="mini-item"><span>Presencial</span><strong id="totalPresencial">0</strong></div>
+            <div class="mini-item"><span>Híbrida</span><strong id="totalHibrida">0</strong></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="layout-agenda" style="margin-top: 24px;">
+        <div class="card">
+          <h2>Aniversariantes do mês</h2>
+          <p class="subtitulo">Pacientes que fazem aniversário no mês atual.</p>
+
+          <div class="lista" id="listaAniversariantesMes" style="margin-top: 14px;"></div>
+        </div>
+
+        <div class="card">
+          <h2>Alertas importantes</h2>
+          <p class="subtitulo">Pontos que merecem atenção.</p>
+
+          <div class="lista" id="listaAlertas" style="margin-top: 14px;"></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/tema-global.js"></script>
+  <script src="js/resumo-geral.js"></script>
+</body>
+<main class="conteudo">
+  <div class="container">
+
+    <div class="topo-interno-simples">
+      <a href="home.html" class="btn btn-claro">← Voltar</a>
+    </div>
+</html>

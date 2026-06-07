@@ -10,31 +10,40 @@
 </head>
 <body>
 
-  
-
   <main class="conteudo">
     <div class="container">
 
-      <a href="home.html" class="subtitulo" style="display: inline-block; margin-bottom: 16px; text-decoration: none;">
-        ← Voltar
-      </a>
+      <div class="topo-interno-simples">
+        <a href="home.html" class="btn btn-claro">← Voltar</a>
+      </div>
 
       <section class="cabecalho-pagina">
         <h1>Financeiro</h1>
         <p class="subtitulo">
-          Controle valores recebidos, pendentes e sessões registradas.
+          Controle valores recebidos, pendentes, pacotes e sessões registradas.
         </p>
       </section>
 
       <section class="grid-cards">
+
+        <a href="pacotes.html" class="card-indicador" style="text-decoration: none;">
+          <span>Pacotes</span>
+          <strong>Registrar pagamentos</strong>
+        </a>
+
         <div class="card-indicador">
-          <span>Recebido no mês</span>
+          <span>Recebido no período</span>
           <strong id="totalRecebidoMes">R$ 0,00</strong>
         </div>
 
         <div class="card-indicador">
-          <span>Pendente</span>
+          <span>Pendente no período</span>
           <strong id="totalPendente">R$ 0,00</strong>
+        </div>
+
+        <div class="card-indicador">
+          <span>Previsto no período</span>
+          <strong id="totalPrevisto">R$ 0,00</strong>
         </div>
 
         <div class="card-indicador">
@@ -46,6 +55,7 @@
           <span>Sessões pendentes</span>
           <strong id="totalSessoesPendentes">0</strong>
         </div>
+
       </section>
 
       <section class="card" style="margin-bottom: 24px;">
@@ -104,7 +114,7 @@
           <div>
             <h2>Registros financeiros</h2>
             <p class="subtitulo">
-              Lista baseada nas sessões registradas.
+              Lista baseada nas sessões registradas no período selecionado.
             </p>
           </div>
         </div>
@@ -121,10 +131,4 @@
   <script src="js/tema-global.js"></script>
   <script src="js/financeiro.js"></script>
 </body>
-<main class="conteudo">
-  <div class="container">
-
-    <div class="topo-interno-simples">
-      <a href="home.html" class="btn btn-claro">← Voltar</a>
-    </div>
 </html>

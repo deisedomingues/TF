@@ -7,9 +7,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (!usuarioFinanceiro) return;
 
-  configurarBotaoSair();
-  configurarFiltrosFinanceiro();
+  if (typeof configurarBotaoSair === "function") {
+    configurarBotaoSair();
+  }
 
+  configurarFiltrosFinanceiro();
   definirPeriodoMesAtual();
 
   await carregarFinanceiro();
@@ -21,7 +23,12 @@ function configurarFiltrosFinanceiro() {
   document.getElementById("filtroStatusPagamento").addEventListener("change", mostrarFinanceiro);
 
   document.getElementById("buscaPacienteFinanceiro").addEventListener("input", () => {
-    buscaPacienteFinanceiro = document.getElementById("buscaPacienteFinanceiro").value.trim().toLowerCase();
+    buscaPacienteFinanceiro = document
+      .getElementById("buscaPacienteFinanceiro")
+      .value
+      .trim()
+      .toLowerCase();
+
     mostrarFinanceiro();
   });
 }
@@ -67,6 +74,7 @@ async function carregarFinanceiro() {
 
   if (error) {
     console.error(error);
+
     lista.innerHTML = `
       <article class="item-lista">
         <div>
@@ -75,6 +83,7 @@ async function carregarFinanceiro() {
         </div>
       </article>
     `;
+
     return;
   }
 
@@ -85,26 +94,23 @@ async function carregarFinanceiro() {
 }
 
 function atualizarIndicadoresFinanceiros() {
-  const hoje = new Date();
-  const primeiroDiaMes = formatarDataISO(new Date(hoje.getFullYear(), hoje.getMonth(), 1));
-  const ultimoDiaMes = formatarDataISO(new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0));
-
-  const sessoesDoMes = sessoesFinanceiro.filter((sessao) => {
-    return sessao.data_sessao >= primeiroDiaMes && sessao.data_sessao <= ultimoDiaMes;
+  const sessoesPagas = sessoesFinanceiro.filter((sessao) => {
+    return sessao.pago === true && Number(sessao.valor_sessao || 0) > 0;
   });
 
-  const recebidasMes = sessoesDoMes.filter((sessao) => sessao.pago === true);
-  const pendentes = sessoesFinanceiro.filter((sessao) => {
+  const sessoesPendentes = sessoesFinanceiro.filter((sessao) => {
     return sessao.pago !== true && Number(sessao.valor_sessao || 0) > 0;
   });
 
-  const totalRecebidoMes = somarValores(recebidasMes);
-  const totalPendente = somarValores(pendentes);
+  const totalRecebido = somarValores(sessoesPagas);
+  const totalPendente = somarValores(sessoesPendentes);
+  const totalPrevisto = totalRecebido + totalPendente;
 
-  document.getElementById("totalRecebidoMes").textContent = formatarMoeda(totalRecebidoMes);
+  document.getElementById("totalRecebidoMes").textContent = formatarMoeda(totalRecebido);
   document.getElementById("totalPendente").textContent = formatarMoeda(totalPendente);
-  document.getElementById("totalSessoesPagas").textContent = recebidasMes.length;
-  document.getElementById("totalSessoesPendentes").textContent = pendentes.length;
+  document.getElementById("totalPrevisto").textContent = formatarMoeda(totalPrevisto);
+  document.getElementById("totalSessoesPagas").textContent = sessoesPagas.length;
+  document.getElementById("totalSessoesPendentes").textContent = sessoesPendentes.length;
 }
 
 function mostrarFinanceiro() {
@@ -139,6 +145,7 @@ function mostrarFinanceiro() {
         </div>
       </article>
     `;
+
     return;
   }
 
